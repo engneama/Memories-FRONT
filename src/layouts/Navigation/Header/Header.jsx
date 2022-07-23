@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import UserMenu from "layouts/UserMenu/UserMenu";
 //UI Components
-import { Box, Button, Group } from "@mantine/core";
-import { Header as HeaderCom, Container, SimpleGrid } from "@mantine/core";
+import { Box, Button, Group, Grid } from "@mantine/core";
+import { Header as HeaderCom, Container } from "@mantine/core";
 import SwitchTheme from "components/SwitchThemesButton/SwitchThemeButton";
 import TextLogo from "components/common/Logo/TextLogo";
 import ImageLogo from "components/common/Logo/ImageLogo";
@@ -18,35 +18,42 @@ const Header = () => {
   return (
     <HeaderCom py="sm" mb={40}>
       <Container>
-        <SimpleGrid cols={2}>
-          {/* Logos */}
-          <Group>
-            <Box className={classes.hideOnMobile}>
-              <ImageLogo />
-            </Box>
+        <Grid>
+          <Grid.Col span={4}>
+            <Group>
+              <Box className={classes.hideOnMobile}>
+                <ImageLogo />
+              </Box>
 
-            <TextLogo />
-          </Group>
+              <TextLogo />
+            </Group>
+          </Grid.Col>
+          <Grid.Col span={8}>
+            <Group position="right">
+              {/* User Menu: shortcuts, and logout */}
+              {auth?.user && <UserMenu user={auth?.user} />}
 
-          <Group position="right">
-            {/* User Menu: shortcuts, and logout */}
-            {auth?.user && <UserMenu user={auth?.user} />}
-
-            {/* Login & Register Buttons */}
-            {!auth?.user && (
-              <Group spacing="xs">
-                <Button variant="light" size="xs" component={Link} to="/login">
-                  Login
-                </Button>
-                <Button size="xs" component={Link} to="/register">
-                  Register
-                </Button>
-              </Group>
-            )}
-            {/* Swtich to dark mode button */}
-            <SwitchTheme />
-          </Group>
-        </SimpleGrid>
+              {/* Login & Register Buttons */}
+              {!auth?.user && (
+                <Group spacing="xs">
+                  <Button
+                    variant="light"
+                    size="xs"
+                    component={Link}
+                    to="/login"
+                  >
+                    Login
+                  </Button>
+                  <Button size="xs" component={Link} to="/register">
+                    Register
+                  </Button>
+                </Group>
+              )}
+              {/* Swtich to dark mode button */}
+              <SwitchTheme />
+            </Group>
+          </Grid.Col>
+        </Grid>
       </Container>
     </HeaderCom>
   );
