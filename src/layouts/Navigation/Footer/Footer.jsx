@@ -1,11 +1,11 @@
-import React from "react";
+//Hooks
 import { useStyles } from "./styles";
+//UI Components
 import { Container, Group, ActionIcon } from "@mantine/core";
-import {
-  TbBrandTwitter,
-  TbBrandYoutube,
-  TbBrandInstagram,
-} from "react-icons/tb";
+import TextLogo from "components/common/Logo/TextLogo";
+//Icons
+import { TbBrandInstagram } from "react-icons/tb";
+import { TbBrandTwitter, TbBrandYoutube } from "react-icons/tb";
 
 const Footer = () => {
   const { classes } = useStyles();
@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <h3>LOGO</h3>
+        <TextLogo />
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg">
             <TbBrandTwitter size={18} />
