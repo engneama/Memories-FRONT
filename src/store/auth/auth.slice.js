@@ -11,19 +11,8 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       //REGISTER
-      .addCase(thunk.register.pending, (state, action) => {
-        console.log("register pending", action.payload);
-      })
-      .addCase(thunk.register.rejected, (state, action) => {
-        console.log("register rejected", action.payload);
-      })
-      .addCase(thunk.register.fulfilled, (state, action) => {
-        console.log("register fulfilled", action.payload);
-      })
       //REGISTER
       //LOGIN
-      .addCase(thunk.login.pending, (state, action) => {})
-      .addCase(thunk.login.rejected, (state, action) => {})
       .addCase(thunk.login.fulfilled, (state, action) => {
         state.user = action.payload;
       })
