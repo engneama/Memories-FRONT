@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import { Image, Text, Box } from "@mantine/core";
+import { Image, Text, Box, useMantineColorScheme } from "@mantine/core";
 import { Logo } from "configs";
 
 const TextLogo = () => {
+  const { colorScheme } = useMantineColorScheme();
+
   return (
     <Box component={Link} to="/">
       <Image
-        src={Logo.text}
+        src={colorScheme === "dark" ? Logo.textWhite : Logo.text}
         alt={Logo.text}
         width="8em"
         withPlaceholder
