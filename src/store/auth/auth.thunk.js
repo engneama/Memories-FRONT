@@ -10,7 +10,6 @@ export const login = createAsyncThunk(
       const decodedValue = await cookieExtractor(data.data.accessToken);
       return decodedValue;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -20,11 +19,9 @@ export const register = createAsyncThunk(
   "auth/register",
   async (userData, thunkAPI) => {
     try {
-      console.log(userData);
       const { data } = await auth.register(userData);
       return data;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -36,7 +33,6 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     const { data } = await auth.logout();
     return data;
   } catch (error) {
-    console.log(error);
     return thunkAPI.rejectWithValue(error);
   }
 });
@@ -49,7 +45,6 @@ export const verifyToken = createAsyncThunk(
       const decodedValue = await cookieExtractor(data.data.accessToken);
       return decodedValue;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
