@@ -91,8 +91,17 @@ const Login = () => {
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <FormProvider {...methods}>
-              <ControlledField name="email" type="email" label="Email" />
-              <ControlledPasswordField name="password" label="password" />
+              <ControlledField
+                name="email"
+                type="email"
+                label="Email"
+                holder="example@example.com"
+              />
+              <ControlledPasswordField
+                name="password"
+                label="Password"
+                holder="Your password"
+              />
             </FormProvider>
 
             <Button
