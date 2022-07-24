@@ -3,6 +3,9 @@ import { Outlet } from "react-router-dom";
 //Hooks
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+//UI Components
+import { LoadingOverlay } from "@mantine/core";
+import LoaderWithText from "components/common/Loader/LoaderWithText";
 //Actions
 import { verifyToken } from "store/auth/auth.thunk";
 
@@ -29,7 +32,15 @@ const PersistLogin = () => {
     console.log(`isLoading: ${isLoading}`);
   }, [isLoading]);
 
-  return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
+  return (
+    <>
+      {isLoading ? (
+        <LoadingOverlay visible loader={<LoaderWithText />} />
+      ) : (
+        <Outlet />
+      )}
+    </>
+  );
 };
 
 export default PersistLogin;

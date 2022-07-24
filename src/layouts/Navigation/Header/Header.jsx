@@ -16,7 +16,7 @@ const Header = () => {
   const auth = useSelector((state) => state.auth);
 
   return (
-    <HeaderCom py="sm" mb={40}>
+    <HeaderCom py="sm">
       <Container>
         <Grid>
           <Grid.Col span={4}>
@@ -50,7 +50,7 @@ const Header = () => {
                 </Group>
               )}
               {/* Swtich to dark mode button */}
-              <SwitchTheme />
+              {!auth?.user && <SwitchTheme />}
             </Group>
           </Grid.Col>
         </Grid>
