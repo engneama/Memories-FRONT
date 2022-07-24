@@ -52,8 +52,12 @@ const Login = () => {
     setIsLoading(true);
     const { payload } = await dispatch(login(data));
 
-    if (payload?.response?.data?.statusCode) {
-      setResMsg(payload?.response?.data?.message);
+    if (payload?.code) {
+      const msg =
+        payload?.code === "ERR_NETWORK"
+          ? "Cannot connect to the server. Please check your connection."
+          : payload?.response?.data?.message;
+      setResMsg(msg);
       setShowResMsg(true);
     } else {
       navigate(form, { replace: true });
@@ -63,7 +67,7 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <section style={{ marginTop: "40px" }}>
       <Title
         align="center"
         sx={(theme) => ({
