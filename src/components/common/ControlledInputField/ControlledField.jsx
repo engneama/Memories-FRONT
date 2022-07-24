@@ -8,7 +8,6 @@ const ControlledField = ({ name, label, type, holder, desc }) => {
     formState: { errors },
   } = useFormContext();
 
-  //TODO: اسال الحاج هايب ليه مش بيجمع الفاليو لو عملت اكمال تلقائي
   return (
     <Controller
       name={name}
@@ -24,9 +23,9 @@ const ControlledField = ({ name, label, type, holder, desc }) => {
           placeholder={holder}
           description={desc}
           error={errors?.[name]?.message}
-          onChange={(e) => {
+          onBlur={(e) => {
             trigger(e.target.name);
-            field.onChange(e);
+            field.onBlur(e);
           }}
         />
       )}

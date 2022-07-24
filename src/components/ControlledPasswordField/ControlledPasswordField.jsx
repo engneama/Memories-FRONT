@@ -22,9 +22,9 @@ const ControlledPasswordField = ({ name, label, holder, desc }) => {
           placeholder={holder}
           description={desc}
           error={errors?.[name]?.message}
-          onChange={(e) => {
+          onBlur={(e) => {
             trigger(e.target.name);
-            field.onChange(e);
+            field.onBlur(e);
           }}
         />
       )}
