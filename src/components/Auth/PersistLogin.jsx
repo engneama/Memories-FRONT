@@ -35,7 +35,11 @@ const PersistLogin = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingOverlay visible loader={<LoaderWithText />} />
+        <LoadingOverlay
+          visible
+          overlayOpacity={1}
+          loader={<LoaderWithText />}
+        />
       ) : (
         <Outlet />
       )}
