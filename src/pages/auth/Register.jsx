@@ -76,9 +76,14 @@ const Register = () => {
 
     const { payload } = await dispatch(registerThunk(data));
 
-    if (payload?.response?.data?.statusCode) {
+    if (payload?.code) {
+      const msg =
+        payload?.code === "ERR_NETWORK"
+          ? "Cannot connect to the server. Please check your connection."
+          : payload?.response?.data?.message;
+
       setIsSuccess(false);
-      setResMsg(payload?.response?.data?.message);
+      setResMsg(msg);
       setShowResMsg(true);
     } else {
       setIsSuccess(true);
@@ -90,7 +95,7 @@ const Register = () => {
   };
 
   return (
-    <section>
+    <section style={{ marginTop: "40px" }}>
       <Title
         align="center"
         sx={(theme) => ({
