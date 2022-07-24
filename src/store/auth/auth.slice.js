@@ -24,7 +24,8 @@ const authSlice = createSlice({
         notifications.Failure(
           "auth/register",
           "Uh Oh!",
-          action.payload.message || "Something went wrong. Please try again."
+          action.payload.response.data.message ||
+            "Something went wrong. Please try again."
         );
       })
       .addCase(thunk.register.fulfilled, (state, action) => {
