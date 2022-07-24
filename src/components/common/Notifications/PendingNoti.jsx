@@ -6,6 +6,7 @@ const PendingNoti = (id, title, message) => {
     title,
     message,
     loading: true,
+    autoClose: false,
   });
 };
 
