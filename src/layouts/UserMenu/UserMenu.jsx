@@ -39,13 +39,7 @@ const UserMenu = ({ user }) => {
         >
           <Group spacing={7}>
             <Avatar src={user.avatar} alt={user.avatar} radius="xl" size={20} />
-            <Text
-              className={classes.username}
-              weight={500}
-              size="sm"
-              sx={{ lineHeight: 1 }}
-              mr={3}
-            >
+            <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
               {user.username}
             </Text>
             <TbChevronDown size={12} />
