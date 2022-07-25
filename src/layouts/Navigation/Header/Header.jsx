@@ -3,7 +3,7 @@ import { useStyles } from "./styes";
 import { useSelector } from "react-redux";
 //Components
 import { Link } from "react-router-dom";
-import UserMenu from "layouts/UserMenu/UserMenu";
+import UserMenu from "components/UserMenu/UserMenu";
 //UI Components
 import { Box, Button, Group, Grid } from "@mantine/core";
 import { Header as HeaderCom, Container } from "@mantine/core";
@@ -50,7 +50,7 @@ const Header = () => {
                 </Group>
               )}
               {/* Swtich to dark mode button */}
-              {!auth?.user && <SwitchTheme />}
+              <SwitchTheme />
             </Group>
           </Grid.Col>
         </Grid>
