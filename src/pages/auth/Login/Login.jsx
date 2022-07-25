@@ -62,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <section className={classes.section}>
       {/* Welcome phrase + redirect to register page */}
       <div>
         <Title align="center" className={classes.title}>
