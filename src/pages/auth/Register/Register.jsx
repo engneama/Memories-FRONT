@@ -59,6 +59,7 @@ const Register = () => {
       setIsSuccess(true);
       setResMsg(payload?.message);
       setShowResMsg(true);
+      methods.reset();
     }
 
     setIsLoading(false);
