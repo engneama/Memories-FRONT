@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Main from "layouts/Main/Main";
 import Home from "pages/Home";
-import Login from "pages/auth/Login";
-import Register from "pages/auth/Register";
+import Login from "pages/auth/Login/Login";
+import Register from "pages/auth/Register/Register";
 import Missing from "pages/Missing/Missing";
 import PersistLogin from "components/Auth/PersistLogin";
 import RequireAuth from "components/Auth/RequireAuth";
