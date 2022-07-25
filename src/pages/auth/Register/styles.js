@@ -2,7 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   section: {
-    marginTop: "40px",
+    marginTop: theme.spacing.lg,
   },
 
   title: {
