@@ -1,12 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import Main from "layouts/Main/Main";
+//Public Components
 import Home from "pages/Home";
 import Login from "pages/auth/Login/Login";
 import Register from "pages/auth/Register/Register";
-import Missing from "pages/Missing/Missing";
-import PersistLogin from "components/Auth/PersistLogin";
+//Protected Components
 import RequireAuth from "components/Auth/RequireAuth";
 import CreateMemory from "pages/CreateMemory";
+import Activation from "pages/auth/Activation/Activation";
+
+import PersistLogin from "components/Auth/PersistLogin";
+import Missing from "pages/Missing/Missing";
 
 const App = () => {
   return (
@@ -17,6 +21,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="activation" element={<Activation />} />
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>
