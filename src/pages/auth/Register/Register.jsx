@@ -19,7 +19,7 @@ import { register as registerThunk } from "store/auth/auth.thunk";
 //Icons
 import { TbSend } from "react-icons/tb";
 //Validations
-import { registerSchema } from "validations";
+import { registerSchema } from "rules";
 
 const Register = () => {
   const { classes } = useStyles();

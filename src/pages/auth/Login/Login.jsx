@@ -1,5 +1,5 @@
 //Packages
-import { loginSchema } from "validations";
+import { loginSchema } from "rules";
 import { yupResolver } from "@hookform/resolvers/yup";
 //Hooks
 import { useState } from "react";
