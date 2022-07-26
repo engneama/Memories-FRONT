@@ -9,15 +9,9 @@ import { Container, Loader, Title, Text } from "@mantine/core";
 //Icons
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
-/**
- * grab the activation code from URL
- * check if code is uuidv4 valid:
- *      if yes, send it to the server and wait for response
- *          check if user is Activated, if yes, send error message.
- *                if not, activate the account and send success message.
- */
-
 const Activation = () => {
+  let interval;
+  const navigate = useNavigate();
   const { classes } = useStyles();
   const [status, setStatus] = useState("pending");
   const [statusCode, setStatusCode] = useState(0);
@@ -26,10 +20,8 @@ const Activation = () => {
     "Please wait while we check with the server..."
   );
 
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
-
   const icon = {
     pending: <Loader size={52} />,
     failure: (
@@ -68,9 +60,7 @@ const Activation = () => {
       setTitle("Done! 🎉");
       setMsg(data.message);
 
-      setInterval(() => {
-        navigate("/login", { replace: true });
-      }, 5000);
+      interval = setInterval(() => navigate("/login", { replace: true }), 5000);
     } catch (error) {
       setStatus("failure");
       setTitle("Uh Oh!");
@@ -81,6 +71,8 @@ const Activation = () => {
 
   useEffect(() => {
     verifyCode();
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
