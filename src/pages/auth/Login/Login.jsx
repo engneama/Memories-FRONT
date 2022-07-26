@@ -55,6 +55,7 @@ const Login = () => {
       setResMsg(msg);
       setShowResMsg(true);
     } else {
+      console.log(location);
       navigate(form, { replace: true });
     }
 
