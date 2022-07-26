@@ -1,9 +1,7 @@
-import Pending from "./PendingNoti";
-import Failure from "./FailureNoti";
-import Success from "./SuccessNoti";
+import ID from "./WithID/index";
+import noID from "./WithoutID/index";
 
 export default {
-  Pending,
-  Failure,
-  Success,
+  ID,
+  noID,
 };
