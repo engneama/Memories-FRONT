@@ -1,11 +1,11 @@
-import { Loader, Stack, Text } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 
-const LoaderWithText = () => {
+const LoaderWithText = ({ icon, msg }) => {
   return (
     <Stack align="center">
-      <Loader size="xl" />
+      {icon}
 
-      <Text size="xl">Loading...</Text>
+      <Text size="xl">{msg}</Text>
     </Stack>
   );
 };
