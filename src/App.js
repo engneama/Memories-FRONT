@@ -9,7 +9,7 @@ import RequireAuth from "components/Auth/RequireAuth";
 import CreateMemory from "pages/CreateMemory";
 import Activation from "pages/auth/Activation/Activation";
 
-import PersistLogin from "components/Auth/PersistLogin";
+import { PersistLogin, NotRequireAuth } from "components/Auth";
 import Missing from "pages/Missing/Missing";
 
 const App = () => {
@@ -19,9 +19,12 @@ const App = () => {
         <Route element={<PersistLogin />}>
           {/* public routes */}
           <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="activation" element={<Activation />} />
+          {/* Prevent LoggenIn users from accessing */}
+          <Route element={<NotRequireAuth />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="activation" element={<Activation />} />
+          </Route>
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>
