@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { useStyles } from "./styles";
 //Actions
 import { logout } from "store/auth/auth.thunk";
+//Components
+import { Link } from "react-router-dom";
 //UI Components
 import { Avatar, UnstyledButton, Text } from "@mantine/core";
 import { Menu, Divider, Group } from "@mantine/core";
@@ -46,10 +48,18 @@ const UserMenu = ({ user }) => {
       }
     >
       <Menu.Label>Your Legacy</Menu.Label>
-      <Menu.Item icon={<FaHeart size={14} color={theme.colors.red[6]} />}>
+      <Menu.Item
+        component={Link}
+        to="likes"
+        icon={<FaHeart size={14} color={theme.colors.red[6]} />}
+      >
         Liked posts
       </Menu.Item>
-      <Menu.Item icon={<TbMessage size={16} color={theme.colors.blue[6]} />}>
+      <Menu.Item
+        component={Link}
+        to="comments"
+        icon={<TbMessage size={16} color={theme.colors.blue[6]} />}
+      >
         Your comments
       </Menu.Item>
 
