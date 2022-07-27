@@ -8,19 +8,21 @@ import { auth } from "services";
 import { Container, Loader, Title, Text } from "@mantine/core";
 //Icons
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+//Vatiables
+const uuidRegex =
+  /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 
 const Activation = () => {
   let interval;
-  const navigate = useNavigate();
   const { classes } = useStyles();
-  const [status, setStatus] = useState("pending");
-  const [statusCode, setStatusCode] = useState(0);
-  const [title, setTitle] = useState("Hold on");
-  const [msg, setMsg] = useState(
-    "Please wait while we check with the server..."
-  );
-
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [res, setRes] = useState({
+    status: "pending",
+    title: "Hold on",
+    msg: "Please wait while we check with the server...",
+  });
+
   const code = searchParams.get("code");
   const icon = {
     pending: <Loader size={52} />,
@@ -46,26 +48,29 @@ const Activation = () => {
     const isCodeValid = uuidRegex.test(code);
 
     if (!isCodeValid) {
-      setStatus("failure");
-      setTitle("Invalid");
-      setMsg(
-        `The given code is Invalid.\nPlease check your email and try again.`
-      );
-      return setStatusCode(406);
+      return setRes({
+        status: "failure",
+        title: "Invalid",
+        msg: "The given code is Invalid.\nPlease check your email and try again.",
+      });
     }
 
     try {
       const { data } = await auth.verifyCode(code);
-      setStatus("success");
-      setTitle("Done! 🎉");
-      setMsg(data.message);
+
+      setRes({
+        status: "success",
+        title: "Done! 🎉",
+        msg: data.message,
+      });
 
       interval = setInterval(() => navigate("/login", { replace: true }), 5000);
     } catch (error) {
-      setStatus("failure");
-      setTitle("Uh Oh!");
-      setMsg(error.response.data.message);
-      return setStatusCode(error.response.data.statusCode);
+      return setRes({
+        status: "failure",
+        title: "Uh Oh!",
+        msg: error.response.data.message,
+      });
     }
   };
 
@@ -79,19 +84,14 @@ const Activation = () => {
     <section className={classes.section}>
       <Container className={classes.Container}>
         <div>
-          <div>{icon[status]}</div>
+          <div>{icon[res.status]}</div>
           <div>
-            <Title>{title}</Title>
+            <Title>{res.title}</Title>
           </div>
           <div>
             <Text size="lg" className={classes.msg}>
-              {msg}
+              {res.msg}
             </Text>
-            {status === "failure" && (
-              <Text size="sm" color="dimmed">
-                error code: {statusCode}
-              </Text>
-            )}
           </div>
         </div>
       </Container>
@@ -100,6 +100,3 @@ const Activation = () => {
 };
 
 export default Activation;
-
-const uuidRegex =
-  /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
