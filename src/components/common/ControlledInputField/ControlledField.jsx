@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import { useFormContext, Controller } from "react-hook-form";
 
-const ControlledField = ({ name, label, type, holder, desc }) => {
+const ControlledField = ({ name, label, type, holder, desc, icon }) => {
   const {
     trigger,
     control,
@@ -22,6 +22,7 @@ const ControlledField = ({ name, label, type, holder, desc }) => {
           label={label}
           placeholder={holder}
           description={desc}
+          icon={icon}
           error={errors?.[name]?.message}
           onBlur={(e) => {
             trigger(e.target.name);

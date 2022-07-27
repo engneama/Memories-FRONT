@@ -1,5 +1,6 @@
 import { PasswordInput } from "@mantine/core";
 import { useFormContext, Controller } from "react-hook-form";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const ControlledPasswordField = ({ name, label, holder, desc }) => {
   const {
@@ -21,6 +22,7 @@ const ControlledPasswordField = ({ name, label, holder, desc }) => {
           label={label}
           placeholder={holder}
           description={desc}
+          icon={<RiLockPasswordLine />}
           error={errors?.[name]?.message}
           onBlur={(e) => {
             trigger(e.target.name);
