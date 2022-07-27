@@ -15,20 +15,18 @@ import { FormProvider } from "react-hook-form";
 //UI Components
 import { Button, Anchor, Paper } from "@mantine/core";
 import { Title, Text, Container, Stack } from "@mantine/core";
-import ResponseAlert from "components/common/Alert/ResponseAlert";
-import ControlledField from "components/common/ControlledInputField/ControlledField";
-import ControlledPasswordField from "components/ControlledPasswordField/ControlledPasswordField";
+import { Alerts, ControlledField } from "components/common";
+import { ControlledPasswordField } from "components";
 
 //Icons
 import { TbSend } from "react-icons/tb";
-//Variables
+import { MdAlternateEmail } from "react-icons/md";
 
 const Login = () => {
   const { classes } = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const form = location.state?.form?.pathname || "/";
 
   const [isLoading, setIsLoading] = useState(false);
   const [showResMsg, setShowResMsg] = useState(false);
@@ -41,6 +39,8 @@ const Login = () => {
       password: "",
     },
   });
+
+  const form = location.state?.form?.pathname || "/";
 
   const onSubmit = async (data) => {
     setShowResMsg(false);
@@ -78,7 +78,7 @@ const Login = () => {
       <Container size="25em">
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
-          {showResMsg && <ResponseAlert isSuccess={false} msg={resMsg} />}
+          {showResMsg && <Alerts.Failure msg={resMsg} />}
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             {/* Form Context */}
@@ -90,6 +90,7 @@ const Login = () => {
                   type="email"
                   label="Email"
                   holder="example@example.com"
+                  icon={<MdAlternateEmail />}
                 />
 
                 {/* Password Field */}
