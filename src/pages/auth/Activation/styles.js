@@ -6,6 +6,7 @@ export const useStyles = createStyles((theme) => ({
     textAlign: "center",
     alignItems: "center",
     marginTop: theme.spacing.lg,
+    marginBottom: theme.spacing.lg,
   },
   Container: {
     display: "flex",
