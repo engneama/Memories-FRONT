@@ -2,28 +2,27 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 //Hooks
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useStyles } from "./styles";
+//Actions
+import { auth } from "services";
 //Components
 import { Link } from "react-router-dom";
 import { FormProvider } from "react-hook-form";
 //UI Components
 import { Button, List, Anchor, Paper } from "@mantine/core";
 import { Title, Text, Container, Stack } from "@mantine/core";
-import ControlledField from "components/common/ControlledInputField/ControlledField";
-import ControlledPasswordField from "components/ControlledPasswordField/ControlledPasswordField";
-import ResponseAlert from "components/common/Alert/ResponseAlert";
-//Actions
-import { register as registerThunk } from "store/auth/auth.thunk";
+import { Alerts, ControlledField } from "components/common";
+import { ControlledPasswordField } from "components";
 //Icons
 import { TbSend } from "react-icons/tb";
+import { FiUser } from "react-icons/fi";
+import { MdAlternateEmail } from "react-icons/md";
 //Validations
 import { registerSchema } from "rules";
 
 const Register = () => {
   const { classes } = useStyles();
-  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showResMsg, setShowResMsg] = useState(false);
@@ -44,25 +43,26 @@ const Register = () => {
     setShowResMsg(false);
     setIsLoading(true);
 
-    const { payload } = await dispatch(registerThunk(data));
+    try {
+      const response = await auth.register(data);
 
-    if (payload?.code) {
+      setResMsg(response.data.message);
+      setIsSuccess(true);
+      setShowResMsg(true);
+
+      methods.reset();
+    } catch (error) {
       const msg =
-        payload?.code === "ERR_NETWORK"
+        error?.code === "ERR_NETWORK"
           ? "Cannot connect to the server. Please check your connection."
-          : payload?.response?.data?.message;
+          : error?.response?.data?.message;
 
       setIsSuccess(false);
       setResMsg(msg);
       setShowResMsg(true);
-    } else {
-      setIsSuccess(true);
-      setResMsg(payload?.message);
-      setShowResMsg(true);
-      methods.reset();
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -82,7 +82,8 @@ const Register = () => {
       <Container size="25em">
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
-          {showResMsg && <ResponseAlert isSuccess={isSuccess} msg={resMsg} />}
+          {showResMsg && !isSuccess && <Alerts.Failure msg={resMsg} />}
+          {showResMsg && isSuccess && <Alerts.Success msg={resMsg} />}
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             {/* Form Context */}
@@ -95,6 +96,7 @@ const Register = () => {
                   label="Username"
                   holder="username"
                   desc="must be between 2 and 12 characters"
+                  icon={<FiUser />}
                 />
                 {/* Email field */}
                 <ControlledField
@@ -102,6 +104,7 @@ const Register = () => {
                   name="email"
                   label="Email"
                   holder="example@example.com"
+                  icon={<MdAlternateEmail />}
                 />
                 {/* Password Field */}
                 <ControlledPasswordField
