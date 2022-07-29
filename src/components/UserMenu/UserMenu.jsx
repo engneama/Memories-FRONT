@@ -11,7 +11,7 @@ import { Avatar, UnstyledButton, Text } from "@mantine/core";
 import { Menu, Divider, Group } from "@mantine/core";
 //Icons
 import { FaHeart } from "react-icons/fa";
-import { TbLogout, TbMessage, TbChevronDown } from "react-icons/tb";
+import { TbLogout, TbMessage, TbChevronDown, TbEdit } from "react-icons/tb";
 
 const UserMenu = ({ user }) => {
   const dispatch = useDispatch();
@@ -24,16 +24,15 @@ const UserMenu = ({ user }) => {
 
   return (
     <Menu
-      size={260}
-      placement="end"
+      width={260}
+      position="bottom-end"
       transition="pop-top-right"
       onClose={() => setUserMenuOpened(false)}
       onOpen={() => setUserMenuOpened(true)}
-      control={
+    >
+      <Menu.Target>
         <UnstyledButton
-          className={cx(classes.user, {
-            [classes.userActive]: userMenuOpened,
-          })}
+          className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
         >
           <Group spacing={7}>
             {/* User's Avatar */}
@@ -45,34 +44,42 @@ const UserMenu = ({ user }) => {
             <TbChevronDown size={12} />
           </Group>
         </UnstyledButton>
-      }
-    >
-      <Menu.Label>Your Legacy</Menu.Label>
-      <Menu.Item
-        component={Link}
-        to="likes"
-        icon={<FaHeart size={14} color={theme.colors.red[6]} />}
-      >
-        Liked posts
-      </Menu.Item>
-      <Menu.Item
-        component={Link}
-        to="comments"
-        icon={<TbMessage size={16} color={theme.colors.blue[6]} />}
-      >
-        Your comments
-      </Menu.Item>
+      </Menu.Target>
+      <Menu.Dropdown>
+        <Menu.Label>Your Legacy</Menu.Label>
+        <Menu.Item
+          component={Link}
+          to="createMemory"
+          icon={<TbEdit size={16} color={theme.colors.yellow[6]} />}
+        >
+          Create new Memory
+        </Menu.Item>
+        <Menu.Item
+          component={Link}
+          to="likes"
+          icon={<FaHeart size={14} color={theme.colors.red[6]} />}
+        >
+          Liked Memories
+        </Menu.Item>
+        <Menu.Item
+          component={Link}
+          to="comments"
+          icon={<TbMessage size={16} color={theme.colors.blue[6]} />}
+        >
+          Your comments
+        </Menu.Item>
 
-      <Divider />
+        <Divider />
 
-      <Menu.Label>Logout</Menu.Label>
-      <Menu.Item
-        color="red"
-        icon={<TbLogout size={16} />}
-        onClick={logoutHandler}
-      >
-        Logout
-      </Menu.Item>
+        <Menu.Label>Logout</Menu.Label>
+        <Menu.Item
+          color="red"
+          icon={<TbLogout size={16} />}
+          onClick={logoutHandler}
+        >
+          Logout
+        </Menu.Item>
+      </Menu.Dropdown>
     </Menu>
   );
 };
