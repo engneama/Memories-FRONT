@@ -15,9 +15,7 @@ import { FormProvider } from "react-hook-form";
 //UI Components
 import { Button, Anchor, Paper } from "@mantine/core";
 import { Title, Text, Container, Stack } from "@mantine/core";
-import { Alerts, ControlledField } from "components/common";
-import { ControlledPasswordField } from "components";
-
+import { Alerts, ControlledFields } from "components/common";
 //Icons
 import { TbSend } from "react-icons/tb";
 import { MdAlternateEmail } from "react-icons/md";
@@ -85,7 +83,7 @@ const Login = () => {
             <FormProvider {...methods}>
               <Stack>
                 {/* Email Field */}
-                <ControlledField
+                <ControlledFields.Text
                   name="email"
                   type="email"
                   label="Email"
@@ -94,7 +92,7 @@ const Login = () => {
                 />
 
                 {/* Password Field */}
-                <ControlledPasswordField
+                <ControlledFields.Password
                   name="password"
                   label="Password"
                   holder="Your password"
