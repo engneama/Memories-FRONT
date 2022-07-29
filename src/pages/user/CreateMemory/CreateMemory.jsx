@@ -42,10 +42,10 @@ const CreateMemory = () => {
 
   return (
     <section className={classes.section}>
-      <Title align="center" className={classes.title}>
-        Create new Memory!
-      </Title>
-      <Container>
+      <Container size="xs">
+        <Title align="center" className={classes.title}>
+          Create new Memory!
+        </Title>
         <Paper withBorder className={classes.paper}>
           <form onSubmit={methods.handleSubmit(handleOnSubmit)}>
             <FormProvider {...methods}>
