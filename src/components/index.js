@@ -1,5 +1,5 @@
-import ControlledPasswordField from "./ControlledPasswordField/ControlledPasswordField";
 import SwitchTheme from "./SwitchThemesButton/SwitchThemeButton";
 import UserMenu from "./UserMenu/UserMenu";
+import RichEditor from "./RichTextEditor";
 
-export { ControlledPasswordField, SwitchTheme, UserMenu };
+export { SwitchTheme, UserMenu, RichEditor };
