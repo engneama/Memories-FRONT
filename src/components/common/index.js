@@ -1,6 +1,6 @@
 import LoadingOverlay from "./Loader/Overlay";
-import ControlledField from "./ControlledInputField/ControlledField";
+import ControlledFields from "./ControlledFields";
 import Alerts from "./Alert";
 import Logo from "./Logo";
 
-export { LoadingOverlay, ControlledField, Alerts, Logo };
+export { LoadingOverlay, ControlledFields, Alerts, Logo };
