@@ -4,20 +4,40 @@ import { useState } from "react";
 import { FileButton, Button, Text, Stack } from "@mantine/core";
 import { ImageSelectHandler } from "helpers";
 //Icon
-import { TbUpload } from "react-icons/tb";
+import { TbUpload, TbCheck, TbX } from "react-icons/tb";
 
 const ImageSelect = ({ data, err: errProp }) => {
-  const [file, setFile] = useState(null);
   const [err, setErr] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  //button COLOR condition
+  const btnColor = success ? "green" : err || errProp ? "red" : "gray";
+  //button ICON condition
+  const btnRightIcon = success ? (
+    <TbCheck size={18} />
+  ) : err || errProp ? (
+    <TbX size={18} color="red" />
+  ) : (
+    <TbUpload size={18} />
+  );
+  //button TEXT condition
+  const btnText = success
+    ? "All good"
+    : err || errProp
+    ? "something went wrong..."
+    : "Upload an image";
 
   const handleOnChange = async (e) => {
-    setFile(e);
+    setErr(false);
+    setSuccess(false);
+
     const base64 = await ImageSelectHandler(e);
 
     if (!base64) {
       return setErr(true);
     }
-    setErr(false);
+
+    setSuccess(true);
     data(base64);
   };
 
@@ -42,6 +62,7 @@ const ImageSelect = ({ data, err: errProp }) => {
           {errProp}
         </Text>
       )}
+
       {/* Select Button */}
       <FileButton
         onChange={handleOnChange}
@@ -50,10 +71,11 @@ const ImageSelect = ({ data, err: errProp }) => {
         {(props) => (
           <Button
             {...props}
-            color={err && "red"}
-            leftIcon={<TbUpload size={18} />}
+            variant="light"
+            color={btnColor}
+            leftIcon={btnRightIcon}
           >
-            {file ? `picked image: ${file.name}` : "Upload an image"}
+            {btnText}
           </Button>
         )}
       </FileButton>
