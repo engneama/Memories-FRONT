@@ -66,19 +66,19 @@ const Register = () => {
 
   return (
     <section className={classes.section}>
-      {/* Welcome phrase + redirect to Login page */}
-      <div>
-        <Title align="center" className={classes.title}>
-          Welcome to the family!
-        </Title>
-        <Text color="dimmed" size="sm" align="center" mt={5}>
-          <Anchor component={Link} to="/login" size="sm">
-            Already have an account? Login
-          </Anchor>
-        </Text>
-      </div>
+      <Container size="xs">
+        {/* Welcome phrase + redirect to Login page */}
+        <div>
+          <Title align="center" className={classes.title}>
+            Welcome to the family!
+          </Title>
+          <Text color="dimmed" size="sm" align="center" mt={5}>
+            <Anchor component={Link} to="/login" size="sm">
+              Already have an account? Login
+            </Anchor>
+          </Text>
+        </div>
 
-      <Container size="25em">
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
           {showResMsg && !isSuccess && <Alerts.Failure msg={resMsg} />}

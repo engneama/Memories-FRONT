@@ -62,18 +62,18 @@ const Login = () => {
 
   return (
     <section className={classes.section}>
-      {/* Welcome phrase + redirect to register page */}
-      <div>
-        <Title align="center" className={classes.title}>
-          Welcome back!
-        </Title>
-        <Text color="dimmed" size="sm" align="center" mt={5}>
-          <Anchor component={Link} to="/register" size="sm">
-            Don't have an account? Register
-          </Anchor>
-        </Text>
-      </div>
-      <Container size="25em">
+      <Container size="xs">
+        {/* Welcome phrase + redirect to register page */}
+        <div>
+          <Title align="center" className={classes.title}>
+            Welcome back!
+          </Title>
+          <Text color="dimmed" size="sm" align="center" mt={5}>
+            <Anchor component={Link} to="/register" size="sm">
+              Don't have an account? Register
+            </Anchor>
+          </Text>
+        </div>
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
           {showResMsg && <Alerts.Failure msg={resMsg} />}
