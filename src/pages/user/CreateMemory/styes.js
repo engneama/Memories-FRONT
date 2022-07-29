@@ -2,9 +2,10 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   section: {
-    width: 600,
-    maxWidth: 600,
-    minWidth: 600,
+    // width: 600,
+    // maxWidth: 600,
+    // minWidth: 600,
+    overflow: "hidden",
     marginTop: theme.spacing.lg,
     marginBottom: theme.spacing.lg,
   },
