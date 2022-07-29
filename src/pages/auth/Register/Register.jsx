@@ -12,8 +12,7 @@ import { FormProvider } from "react-hook-form";
 //UI Components
 import { Button, List, Anchor, Paper } from "@mantine/core";
 import { Title, Text, Container, Stack } from "@mantine/core";
-import { Alerts, ControlledField } from "components/common";
-import { ControlledPasswordField } from "components";
+import { Alerts, ControlledFields } from "components/common";
 //Icons
 import { TbSend } from "react-icons/tb";
 import { FiUser } from "react-icons/fi";
@@ -90,7 +89,7 @@ const Register = () => {
             <FormProvider {...methods}>
               <Stack>
                 {/* Username field */}
-                <ControlledField
+                <ControlledFields.Text
                   type="text"
                   name="username"
                   label="Username"
@@ -99,7 +98,7 @@ const Register = () => {
                   icon={<FiUser />}
                 />
                 {/* Email field */}
-                <ControlledField
+                <ControlledFields.Text
                   type="email"
                   name="email"
                   label="Email"
@@ -107,14 +106,14 @@ const Register = () => {
                   icon={<MdAlternateEmail />}
                 />
                 {/* Password Field */}
-                <ControlledPasswordField
+                <ControlledFields.Password
                   name="password"
                   label="Password"
                   holder="Your password"
                   desc={passwordDescription}
                 />
                 {/* Confirm Password Field */}
-                <ControlledPasswordField
+                <ControlledFields.Password
                   name="confirmPassword"
                   label="Confirm password"
                   holder="Your password"
