@@ -3,8 +3,7 @@ import Main from "layouts/Main/Main";
 //Public Components
 import { Home, Missing, Auth } from "pages";
 //Protected Components
-import { User } from "pages";
-
+import { Memory, Comment, Like } from "pages";
 //Controll Access
 import RequireAuth from "components/Auth/RequireAuth";
 import { PersistLogin, NotRequireAuth } from "components/Auth";
@@ -16,6 +15,8 @@ const App = () => {
         <Route element={<PersistLogin />}>
           {/* public routes */}
           <Route index element={<Home />} />
+          <Route path="memory/:_id" element={<Memory.Details />} />
+
           {/* Prevent LoggenIn users from accessing */}
           <Route element={<NotRequireAuth />}>
             <Route path="login" element={<Auth.Login />} />
@@ -25,9 +26,9 @@ const App = () => {
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>
-            <Route path="createMemory" element={<User.CreateMemory />} />
-            <Route path="likes" element={<User.Likes />} />
-            <Route path="comments" element={<User.Comments />} />
+            <Route path="createMemory" element={<Memory.Create />} />
+            <Route path="likes" element={<Like.Create />} />
+            <Route path="comments" element={<Comment.Create />} />
           </Route>
 
           {/* catch all */}
