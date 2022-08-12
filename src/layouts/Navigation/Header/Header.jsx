@@ -8,8 +8,7 @@ import UserMenu from "components/UserMenu/UserMenu";
 import { Box, Button, Group, Grid } from "@mantine/core";
 import { Header as HeaderCom, Container } from "@mantine/core";
 import SwitchTheme from "components/SwitchThemesButton/SwitchThemeButton";
-import TextLogo from "components/common/Logo/TextLogo";
-import ImageLogo from "components/common/Logo/ImageLogo";
+import { Common } from "components";
 
 const Header = () => {
   const { classes } = useStyles();
@@ -22,10 +21,9 @@ const Header = () => {
           <Grid.Col span={4}>
             <Group>
               <Box className={classes.hideOnMobile}>
-                <ImageLogo />
+                <Common.Logo.ImageLogo />
               </Box>
-
-              <TextLogo />
+              <Common.Logo.TextLogo />
             </Group>
           </Grid.Col>
           <Grid.Col span={8}>
