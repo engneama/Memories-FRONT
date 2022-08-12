@@ -1,6 +1,8 @@
 import Auth from "./auth";
-import User from "./user";
 import Missing from "./Missing/Missing";
-import Home from "./Home";
+import Home from "./Home/Home";
+import Memory from "./Memory";
+import Comment from "./Comment";
+import Like from "./Like";
 
-export { Auth, User, Missing, Home };
+export { Auth, Memory, Comment, Like, Missing, Home };
