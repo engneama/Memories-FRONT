@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //UI Components
-import { LoadingOverlay } from "components/common";
+import { Common } from "components";
 //Actions
 import { verifyToken } from "store/auth/auth.thunk";
 
@@ -27,11 +27,9 @@ const PersistLogin = () => {
     !auth?.user ? verifyRefreshToken() : setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    console.log(`isLoading: ${isLoading}`);
-  }, [isLoading]);
+  useEffect(() => {}, [isLoading]);
 
-  return <>{isLoading ? <LoadingOverlay /> : <Outlet />}</>;
+  return <>{isLoading ? <Common.LoadingOverlay /> : <Outlet />}</>;
 };
 
 export default PersistLogin;
