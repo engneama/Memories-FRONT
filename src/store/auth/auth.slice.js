@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as thunk from "./auth.thunk";
-import notifications from "components/common/Notifications";
 
 const initialState = {
   user: null,
@@ -9,6 +8,14 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    addUser(state, action) {
+      state.user = action.payload;
+    },
+    removeUser(state) {
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //REGISTER
@@ -37,6 +44,8 @@ const authSlice = createSlice({
   },
 });
 
-const { reducer } = authSlice;
+const { reducer, actions } = authSlice;
+
+export const { addUser, removeUser } = actions;
 
 export default reducer;
