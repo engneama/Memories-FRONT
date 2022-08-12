@@ -15,7 +15,7 @@ import { FormProvider } from "react-hook-form";
 //UI Components
 import { Button, Anchor, Paper } from "@mantine/core";
 import { Title, Text, Container, Stack } from "@mantine/core";
-import { Alerts, ControlledFields } from "components/common";
+import { Common } from "components";
 //Icons
 import { TbSend } from "react-icons/tb";
 import { MdAlternateEmail } from "react-icons/md";
@@ -44,12 +44,13 @@ const Login = () => {
     setShowResMsg(false);
     setIsLoading(true);
     const { payload } = await dispatch(login(data));
+    console.log("LOGIN: ", payload);
 
-    if (payload?.code) {
+    if (payload?.code || payload?.statusCode) {
       const msg =
         payload?.code === "ERR_NETWORK"
           ? "Cannot connect to the server. Please check your connection."
-          : payload?.response?.data?.message;
+          : payload.message;
       setResMsg(msg);
       setShowResMsg(true);
     } else {
@@ -76,14 +77,14 @@ const Login = () => {
         </div>
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
-          {showResMsg && <Alerts.Failure msg={resMsg} />}
+          {showResMsg && <Common.Alerts.Failure msg={resMsg} />}
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             {/* Form Context */}
             <FormProvider {...methods}>
               <Stack>
                 {/* Email Field */}
-                <ControlledFields.Text
+                <Common.ControlledFields.Text
                   name="email"
                   type="email"
                   label="Email"
@@ -92,7 +93,7 @@ const Login = () => {
                 />
 
                 {/* Password Field */}
-                <ControlledFields.Password
+                <Common.ControlledFields.Password
                   name="password"
                   label="Password"
                   holder="Your password"
