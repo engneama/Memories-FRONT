@@ -12,7 +12,7 @@ import { FormProvider } from "react-hook-form";
 //UI Components
 import { Button, List, Anchor, Paper } from "@mantine/core";
 import { Title, Text, Container, Stack } from "@mantine/core";
-import { Alerts, ControlledFields } from "components/common";
+import { Common } from "components";
 //Icons
 import { TbSend } from "react-icons/tb";
 import { FiUser } from "react-icons/fi";
@@ -81,15 +81,15 @@ const Register = () => {
 
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
-          {showResMsg && !isSuccess && <Alerts.Failure msg={resMsg} />}
-          {showResMsg && isSuccess && <Alerts.Success msg={resMsg} />}
+          {showResMsg && !isSuccess && <Common.Alerts.Failure msg={resMsg} />}
+          {showResMsg && isSuccess && <Common.Alerts.Success msg={resMsg} />}
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             {/* Form Context */}
             <FormProvider {...methods}>
               <Stack>
                 {/* Username field */}
-                <ControlledFields.Text
+                <Common.ControlledFields.Text
                   type="text"
                   name="username"
                   label="Username"
@@ -98,7 +98,7 @@ const Register = () => {
                   icon={<FiUser />}
                 />
                 {/* Email field */}
-                <ControlledFields.Text
+                <Common.ControlledFields.Text
                   type="email"
                   name="email"
                   label="Email"
@@ -106,14 +106,14 @@ const Register = () => {
                   icon={<MdAlternateEmail />}
                 />
                 {/* Password Field */}
-                <ControlledFields.Password
+                <Common.ControlledFields.Password
                   name="password"
                   label="Password"
                   holder="Your password"
                   desc={passwordDescription}
                 />
                 {/* Confirm Password Field */}
-                <ControlledFields.Password
+                <Common.ControlledFields.Password
                   name="confirmPassword"
                   label="Confirm password"
                   holder="Your password"
