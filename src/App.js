@@ -27,6 +27,7 @@ const App = () => {
           {/* protected routes */}
           <Route element={<RequireAuth />}>
             <Route path="createMemory" element={<Memory.Create />} />
+            <Route path="editMemory" element={<Memory.Edit />} />
             <Route path="likes" element={<Like.Create />} />
             <Route path="comments" element={<Comment.Create />} />
           </Route>
