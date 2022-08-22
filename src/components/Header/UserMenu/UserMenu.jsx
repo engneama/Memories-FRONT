@@ -36,7 +36,12 @@ const UserMenu = ({ user }) => {
         >
           <Group spacing={7}>
             {/* User's Avatar */}
-            <Avatar src={user.avatar} alt={user.avatar} radius="xl" size={20} />
+            <Avatar
+              src={user.avatarURL}
+              alt={`${user.username}'s avatar`}
+              radius="xl"
+              size={20}
+            />
             {/* User name */}
             <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
               {user.username}
@@ -46,7 +51,7 @@ const UserMenu = ({ user }) => {
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Label>Your Legacy</Menu.Label>
+        <Menu.Label>Make a Legacy</Menu.Label>
         <Menu.Item
           component={Link}
           to="createMemory"
@@ -54,6 +59,7 @@ const UserMenu = ({ user }) => {
         >
           Create new Memory
         </Menu.Item>
+        <Menu.Label>Your Legacy</Menu.Label>
         <Menu.Item
           component={Link}
           to="likes"
@@ -71,7 +77,7 @@ const UserMenu = ({ user }) => {
 
         <Divider />
 
-        <Menu.Label>Logout</Menu.Label>
+        <Menu.Label>Danger Zone</Menu.Label>
         <Menu.Item
           color="red"
           icon={<TbLogout size={16} />}
