@@ -8,7 +8,7 @@ import { useFormContext, Controller } from "react-hook-form";
 //Icons
 import { TbTags } from "react-icons/tb";
 
-const Tags = () => {
+const Tags = ({ initalValue = [] }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [tags, setTags] = useState([]);
 
@@ -20,7 +20,6 @@ const Tags = () => {
 
   const handleGetTags = async () => {
     setIsLoading(true);
-
     try {
       const { data } = await memory.getTags();
       setTags(data.data.tags);
@@ -35,35 +34,46 @@ const Tags = () => {
     handleGetTags();
   }, []);
 
+  const test = (current, query) => {
+    return [...current, query];
+  };
+
   return (
     <Controller
       name="tags"
       control={control}
-      defaultValue={[]}
+      defaultValue={initalValue}
       render={({ field }) => (
         <MultiSelect
           {...field}
           required
+          clearable //add a X button on the right to clear the field.
+          creatable //the ability to add new tags
+          searchable //the ability to search for a certain tag
           disabled={isLoading}
           name="tags"
           label="Tags"
           placeholder="Select or enter 3 tags"
           description="Select at least one tag"
           icon={<TbTags size={18} />}
-          searchable //the ability to search for a certain tag
           data={tags} //take an array of data to auto complete
           limit={5} //number of suggestions at the same time
           maxSelectedValues={3} //max number of tags
           maxDropdownHeight={160}
-          clearable //add a X button on the right to clear the field.
           clearButtonLabel="Clear selection"
-          creatable //the ability to add new tags
           getCreateLabel={(query) => `+ Create ${query}`} //text shown when adding new tag
           error={errors?.tags?.message}
           onBlur={(e) => {
-            trigger(e.target.name);
+            trigger("tags");
             field.onBlur(e);
           }}
+          // onCreate={(query) => {
+          //   console.log(query);
+          //   field.value = [...field.value, query];
+          //   console.log(field.value);
+          //   setData((current) => [...current, item]);
+          //   return item;
+          // }}
         />
       )}
     />
