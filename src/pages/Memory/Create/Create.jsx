@@ -85,6 +85,7 @@ const Create = () => {
 
                 {/* Image Select */}
                 <Common.UncontrolledFields.ImageSelect
+                  name="Cover"
                   data={handleImageSelect}
                   err={methods.formState.errors?.cover?.message}
                 />
