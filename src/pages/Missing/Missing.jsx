@@ -1,4 +1,7 @@
+//Hooks
 import { useStyles } from "./styles";
+import { Link } from "react-router-dom";
+//UI Components
 import { Container, Title, Text, Button, Group } from "@mantine/core";
 
 const Missing = () => {
@@ -6,24 +9,22 @@ const Missing = () => {
 
   return (
     <Container className={classes.root}>
-      <div className={classes.inner}>
-        <div className={classes.content}>
-          <Title className={classes.title}>Nothing to see here</Title>
-          <Text
-            color="dimmed"
-            size="lg"
-            align="center"
-            className={classes.description}
-          >
-            Page you are trying to open does not exist. You may have mistyped
-            the address, or the page has been moved to another URL. If you think
-            this is an error contact support.
-          </Text>
-          <Group position="center">
-            <Button size="md">Take me back to home page</Button>
-          </Group>
-        </div>
-      </div>
+      <div className={classes.label}>404</div>
+      <Title className={classes.title}>You have found a secret place.</Title>
+      <Text
+        color="dimmed"
+        size="lg"
+        align="center"
+        className={classes.description}
+      >
+        Unfortunately, this is only a 404 page. You may have mistyped the
+        address, or the page has been moved to another URL.
+      </Text>
+      <Group position="center">
+        <Button size="md" component={Link} to="/">
+          Take me back to home page
+        </Button>
+      </Group>
     </Container>
   );
 };
