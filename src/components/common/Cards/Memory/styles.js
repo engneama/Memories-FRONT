@@ -6,7 +6,7 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
     boxShadow: theme.shadows.md,
 
     [`&:hover .${getRef("cover")}`]: {
-      transform: "scale(1.1)",
+      transform: "scale(1.03)",
     },
   },
 
@@ -16,8 +16,8 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
   },
 
   cover: {
-    transition: "all .5s ease",
     ref: getRef("cover"),
+    transition: "transform 500ms ease",
   },
 
   overlay: {
