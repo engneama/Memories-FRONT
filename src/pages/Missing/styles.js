@@ -6,26 +6,19 @@ export const useStyles = createStyles((theme) => ({
     paddingBottom: 80,
   },
 
-  inner: {
-    position: "relative",
-  },
-
-  image: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    left: 0,
-    zIndex: 0,
-    opacity: 0.75,
-  },
-
-  content: {
-    paddingTop: 220,
-    position: "relative",
-    zIndex: 1,
+  label: {
+    textAlign: "center",
+    fontWeight: 900,
+    fontSize: 220,
+    lineHeight: 1,
+    marginBottom: theme.spacing.xl * 1.5,
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[4]
+        : theme.colors.gray[2],
 
     [theme.fn.smallerThan("sm")]: {
-      paddingTop: 120,
+      fontSize: 120,
     },
   },
 
@@ -41,7 +34,7 @@ export const useStyles = createStyles((theme) => ({
   },
 
   description: {
-    maxWidth: 540,
+    maxWidth: 500,
     margin: "auto",
     marginTop: theme.spacing.xl,
     marginBottom: theme.spacing.xl * 1.5,
