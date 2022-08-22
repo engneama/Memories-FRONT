@@ -5,9 +5,9 @@ import { cookieExtractor, cookieDestroyer } from "helpers";
 
 export const getAll = createAsyncThunk(
   "memories/getAll",
-  async (_, thunkAPI) => {
+  async (currentPage, thunkAPI) => {
     try {
-      const { data } = await memory.getAll();
+      const { data } = await memory.getAll(currentPage);
       console.log(data);
       return data;
     } catch (error) {
