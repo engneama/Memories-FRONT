@@ -38,6 +38,11 @@ const Register = () => {
     },
   });
 
+  const handleImageSelect = (data) => {
+    methods.register("avatar");
+    methods.setValue("avatar", data);
+  };
+
   const onSubmit = async (data) => {
     setShowResMsg(false);
     setIsLoading(true);
@@ -88,6 +93,12 @@ const Register = () => {
             {/* Form Context */}
             <FormProvider {...methods}>
               <Stack>
+                {/* Image Select */}
+                <Common.UncontrolledFields.ImageSelect
+                  name="Avatar"
+                  data={handleImageSelect}
+                  err={methods.formState.errors?.cover?.message}
+                />
                 {/* Username field */}
                 <Common.ControlledFields.Text
                   type="text"
