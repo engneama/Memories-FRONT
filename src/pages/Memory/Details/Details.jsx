@@ -2,59 +2,60 @@
 import { useStyles } from "./styles";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //Actions
-import { memory } from "services";
+import { recommendations } from "services";
+import { getSingle, like } from "store/memory/memory.thunk";
+import { getAll } from "store/comments/comments.thunk";
 //UI Components
 import { Container, Grid, Divider } from "@mantine/core";
-import { MemoryDetails } from "components";
+import { Memory, Comments, Recommendations } from "layouts/MemoryDetails";
 import { Common } from "components";
 
 const Details = () => {
+  //Basic
   const { classes } = useStyles();
   const { _id } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [memoryData, setMemoryData] = useState(null);
+  const dispatch = useDispatch();
+  //useStates
   const [recosData, setRecosData] = useState(null);
+  //useSelectors
   const { user } = useSelector((state) => state.auth);
+  const { memory: memoryData } = useSelector((state) => state.memory);
+  const { comments: commentsData } = useSelector((state) => state.comments);
+  //Checkers
   const isMemoryReady = memoryData !== null;
+  const isCommentsReady = commentsData !== null;
   const isRecosReady = recosData !== null;
 
-  const hanldeLike = async () => {
-    console.log("LIKE");
+  const hanldeLike = async (data) => {
+    await dispatch(like(data));
   };
 
-  const handleGetMemorysDetails = async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await memory.getSingle({ _id });
-      setMemoryData(data.data.memory);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+  const getMemorys = async () => {
+    await dispatch(getSingle({ _id }));
   };
 
-  const handleGetRecommendations = async () => {
-    try {
-      const { data } = await memory.getRecommendations({ _id });
-      setRecosData(data.data.recommendations);
-    } catch (error) {
-      console.log(error);
-    }
+  const getComments = async () => {
+    await dispatch(getAll({ _id }));
+  };
+
+  const getRecommendations = async () => {
+    const { data } = await recommendations.get({ _id });
+    setRecosData(data.data.recommendations);
   };
 
   useEffect(() => {
-    handleGetMemorysDetails();
-    handleGetRecommendations();
+    getMemorys();
+    getComments();
+    getRecommendations();
   }, [_id]);
 
   return (
     <Container className={classes.section}>
       {!isMemoryReady && <Common.LoadingOverlay />}
       {isMemoryReady && (
-        <MemoryDetails.Memory data={memoryData} like={hanldeLike} user={user} />
+        <Memory data={memoryData} like={hanldeLike} user={user} />
       )}
       <Grid>
         <Grid.Col xs={12} sm={8}>
@@ -67,8 +68,10 @@ const Details = () => {
               my="xl"
               size="sm"
             />
-            {/* <Comments /> */}
-            COMMENTS
+            {!isCommentsReady && <Common.LoadingOverlay />}
+            {isCommentsReady && (
+              <Comments memoryId={_id} data={commentsData} user={user} />
+            )}
           </div>
         </Grid.Col>
 
@@ -83,9 +86,7 @@ const Details = () => {
               size="sm"
             />
             {!isRecosReady && <Common.LoadingOverlay />}
-            {isRecosReady && (
-              <MemoryDetails.Recommendations recos={recosData} />
-            )}
+            {isRecosReady && <Recommendations recos={recosData} />}
           </div>
         </Grid.Col>
       </Grid>
