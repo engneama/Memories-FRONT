@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import { useFormContext, Controller } from "react-hook-form";
 
-const Text = ({ name, label, type, holder, desc, icon }) => {
+const Text = ({ name, label, type, holder, desc, icon, initalValue = "" }) => {
   const {
     trigger,
     control,
@@ -12,7 +12,7 @@ const Text = ({ name, label, type, holder, desc, icon }) => {
     <Controller
       name={name}
       control={control}
-      defaultValue=""
+      defaultValue={initalValue}
       render={({ field }) => (
         <TextInput
           {...field}
