@@ -2,30 +2,41 @@
 import { useEffect } from "react";
 import { useStyles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "Hooks";
 //Actions
-import { getAll } from "store/memories/memories.thunk";
+import { getAll, like, _delete } from "store/memories/memories.thunk";
 //UI Components
 import { Common } from "components";
 import { Container, Grid } from "@mantine/core";
 
 const Home = () => {
+  //Hookes
   const { classes } = useStyles();
   const dispatch = useDispatch();
-  const memoriesData = useSelector((state) => state.memories);
-  const { user: userData } = useSelector((state) => state.auth);
-
-  const isReady = memoriesData.memories !== null;
+  const navigate = useNavigate();
+  const { set } = useLocalStorage();
+  //Selectors
+  const data = useSelector((state) => state.memories);
+  const { user } = useSelector((state) => state.auth);
+  //Checkers
+  const isReady = data.memories !== null;
 
   const likeMemory = async (data) => {
-    console.log("likeMemory: ", data);
+    try {
+      await dispatch(like(data));
+    } catch (error) {
+      console.log("Home: ", error);
+    }
   };
 
-  const editMemory = async (data) => {
-    console.log("editMemory: ", data);
+  const editMemory = (data) => {
+    set("editMemory", data);
+    navigate("/editMemory");
   };
 
   const deleteMemory = async (data) => {
-    console.log("deleteMemory: ", data);
+    await dispatch(_delete(data));
   };
 
   const getAllMemories = async () => {
@@ -38,7 +49,7 @@ const Home = () => {
 
   const MemoriesArray =
     isReady &&
-    memoriesData.memories?.map((memory, index) => (
+    data.memories?.map((memory, index) => (
       <Grid.Col
         key={memory._id + index}
         xs={12}
@@ -50,7 +61,7 @@ const Home = () => {
         <Common.Cards.Memory
           key={memory._id}
           data={memory}
-          userId={userData?._id}
+          user={{ _id: user?._id, role: user?.role }}
           like={likeMemory}
           edit={editMemory}
           _delete={deleteMemory}
