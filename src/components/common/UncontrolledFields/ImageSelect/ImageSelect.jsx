@@ -6,7 +6,7 @@ import { ImageSelectHandler } from "helpers";
 //Icon
 import { TbUpload, TbCheck, TbX } from "react-icons/tb";
 
-const ImageSelect = ({ data, err: errProp, isEdit }) => {
+const ImageSelect = ({ data, err: errProp, isEdit, name }) => {
   const [err, setErr] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -47,7 +47,7 @@ const ImageSelect = ({ data, err: errProp, isEdit }) => {
     <Stack spacing={0}>
       {/* Label */}
       <Text size="sm">
-        Cover <span style={{ color: "red" }}>*</span>
+        {name} <span style={{ color: "red" }}>*</span>
       </Text>
       {/* Description */}
       <Text size="sm" color="dimmed">
