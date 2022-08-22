@@ -4,15 +4,17 @@ import { useStyles } from "./styles";
 import { Link } from "react-router-dom";
 //UI Components
 import { UserInfo, LikesBadge } from "./subComponents";
-import { Card, Text, Image, Button, Stack, Box, Anchor } from "@mantine/core";
+import { Card, Text, Image, Button, Box, Anchor } from "@mantine/core";
 //Icons
 import { TbEdit, TbTrash } from "react-icons/tb";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
-const Memory = ({ data, userId, like, edit, _delete }) => {
+const Memory = ({ data, user, like, edit, _delete }) => {
   const { classes } = useStyles();
-  const isLoggedIn = userId !== undefined;
-  const isAuthor = data.author._id === userId;
+  //Checkers
+  const isLoggedIn = user._id !== undefined;
+  const isAuthor = data.author._id === user._id;
+  const isAdmin = user.role === "admin";
 
   const tags = data.tags.map((tag) => (
     <Text size="sm" color="dimmed" key={tag} component={Link} to={`/`}>
@@ -20,7 +22,7 @@ const Memory = ({ data, userId, like, edit, _delete }) => {
     </Text>
   ));
 
-  const likeIcon = data.likes.includes(userId) ? (
+  const likeIcon = data.likes.includes(user._id) ? (
     <AiFillHeart size={18} color="red" />
   ) : (
     <AiOutlineHeart size={18} color="red" />
@@ -91,25 +93,23 @@ const Memory = ({ data, userId, like, edit, _delete }) => {
       </Card.Section>
 
       {/* Buttons */}
-      {isLoggedIn && (
+      {(isLoggedIn || isAdmin) && (
         <Card.Section withBorder p="sm" className={classes.buttons}>
           {/* Like Button */}
           <Button
             fullWidth
             variant="light"
             color="pink"
-            onClick={() => like({ memoryId: data._id, userId })}
+            onClick={() =>
+              like({ _id: data._id, userId: user._id, type: "card" })
+            }
           >
             {likeIcon}
           </Button>
 
           {/* Edit Button */}
           {isAuthor && (
-            <Button
-              fullWidth
-              variant="light"
-              onClick={() => edit({ memoryId: data._id })}
-            >
+            <Button fullWidth variant="light" onClick={() => edit(data)}>
               <TbEdit size={18} />
             </Button>
           )}
@@ -119,7 +119,7 @@ const Memory = ({ data, userId, like, edit, _delete }) => {
             <Button
               variant="light"
               color="yellow"
-              onClick={() => _delete({ memoryId: data._id })}
+              onClick={() => _delete({ _id: data._id, public_id: data.cover })}
             >
               <TbTrash size={18} color="orange" />
             </Button>
