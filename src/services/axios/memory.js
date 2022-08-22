@@ -1,7 +1,7 @@
 import { API } from "./options";
 
 //GET
-const getAll = () => API.get("/memory/getAll");
+const getAll = (data) => API.get(`/memory/getAll?page=${data}`);
 const getSingle = (data) => API.get(`/memory/getSingle/${data._id}`);
 const getTags = () => API.get("/memory/getTags");
 const search = ({ query, tags }) =>
