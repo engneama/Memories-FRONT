@@ -49,7 +49,7 @@ const Memory = ({ data, user, like, edit, _delete }) => {
         {/* userInfo */}
         <UserInfo
           styles={classes.userInfo}
-          URL={data.author.avatar}
+          URL={data.author.avatarURL}
           username={data.author.username}
           time={data.createdAt}
         />
@@ -93,7 +93,7 @@ const Memory = ({ data, user, like, edit, _delete }) => {
       </Card.Section>
 
       {/* Buttons */}
-      {(isLoggedIn || isAdmin) && (
+      {isLoggedIn && (
         <Card.Section withBorder p="sm" className={classes.buttons}>
           {/* Like Button */}
           <Button
@@ -108,14 +108,14 @@ const Memory = ({ data, user, like, edit, _delete }) => {
           </Button>
 
           {/* Edit Button */}
-          {isAuthor && (
+          {(isAuthor || isAdmin) && (
             <Button fullWidth variant="light" onClick={() => edit(data)}>
               <TbEdit size={18} />
             </Button>
           )}
 
           {/* Delete Button */}
-          {isAuthor && (
+          {(isAuthor || isAdmin) && (
             <Button
               variant="light"
               color="yellow"
