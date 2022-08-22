@@ -53,6 +53,7 @@ const Details = () => {
 
   return (
     <Container className={classes.section}>
+      {/* MEMORY DETAILS SECTION */}
       {!isMemoryReady && <Common.LoadingOverlay />}
       {isMemoryReady && (
         <Memory data={memoryData} like={hanldeLike} user={user} />
