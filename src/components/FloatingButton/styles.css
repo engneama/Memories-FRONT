@@ -1,8 +1,8 @@
 .FAB{
     position: fixed;
     z-index: 99;
-    right: 2em;
-    bottom: 2em;
-    height: 60px;
+    right: 5em;
+    bottom: 4em;
+    height: 67px;
     border-radius: 32px;
 }
