@@ -21,14 +21,17 @@ import { TbSend } from "react-icons/tb";
 import { MdAlternateEmail } from "react-icons/md";
 
 const Login = () => {
+  //hooks
   const { classes } = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-
+  const { state } = useLocation();
+  //states
   const [isLoading, setIsLoading] = useState(false);
   const [showResMsg, setShowResMsg] = useState(false);
   const [resMsg, setResMsg] = useState("");
+  //variables
+  const form = state?.form?.pathname || "/";
 
   const methods = useForm({
     resolver: yupResolver(loginSchema),
@@ -38,13 +41,10 @@ const Login = () => {
     },
   });
 
-  const form = location.state?.form?.pathname || "/";
-
   const onSubmit = async (data) => {
     setShowResMsg(false);
     setIsLoading(true);
     const { payload } = await dispatch(login(data));
-    console.log("LOGIN: ", payload);
 
     if (payload?.code || payload?.statusCode) {
       const msg =
@@ -54,7 +54,6 @@ const Login = () => {
       setResMsg(msg);
       setShowResMsg(true);
     } else {
-      console.log(location);
       navigate(form, { replace: true });
     }
 
@@ -78,6 +77,7 @@ const Login = () => {
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
           {showResMsg && <Common.Alerts.Failure msg={resMsg} />}
+          {state?.isRegister && <Common.Alerts.Success msg={state?.message} />}
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             {/* Form Context */}
