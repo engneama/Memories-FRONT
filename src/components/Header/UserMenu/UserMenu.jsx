@@ -39,11 +39,11 @@ const UserMenu = ({ user }) => {
             <Avatar
               src={user.avatarURL}
               alt={`${user.username}'s avatar`}
-              radius="xl"
-              size={20}
+              radius="md"
+              size="sm"
             />
             {/* User name */}
-            <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+            <Text weight={500} size="md" sx={{ lineHeight: 1 }} mr={3}>
               {user.username}
             </Text>
             <TbChevronDown size={12} />
