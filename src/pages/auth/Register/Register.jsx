@@ -1,9 +1,10 @@
 //Packages
 import { yupResolver } from "@hookform/resolvers/yup";
 //Hooks
+import { useStyles } from "./styles";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useStyles } from "./styles";
+import { useNavigate } from "react-router-dom";
 //Actions
 import { auth } from "services";
 //Components
@@ -21,12 +22,13 @@ import { MdAlternateEmail } from "react-icons/md";
 import { registerSchema } from "rules";
 
 const Register = () => {
+  //hooks
   const { classes } = useStyles();
-
+  const navigate = useNavigate();
+  //states
   const [isLoading, setIsLoading] = useState(false);
   const [showResMsg, setShowResMsg] = useState(false);
   const [resMsg, setResMsg] = useState("");
-  const [isSuccess, setIsSuccess] = useState(true);
 
   const methods = useForm({
     resolver: yupResolver(registerSchema),
@@ -50,9 +52,9 @@ const Register = () => {
     try {
       const response = await auth.register(data);
 
-      setResMsg(response.data.message);
-      setIsSuccess(true);
-      setShowResMsg(true);
+      navigate("/login", {
+        state: { isRegister: true, message: response.data.message },
+      });
 
       methods.reset();
     } catch (error) {
@@ -61,7 +63,6 @@ const Register = () => {
           ? "Cannot connect to the server. Please check your connection."
           : error?.response?.data?.message;
 
-      setIsSuccess(false);
       setResMsg(msg);
       setShowResMsg(true);
     } finally {
@@ -86,19 +87,12 @@ const Register = () => {
 
         <Paper withBorder className={classes.paper}>
           {/* response message  */}
-          {showResMsg && !isSuccess && <Common.Alerts.Failure msg={resMsg} />}
-          {showResMsg && isSuccess && <Common.Alerts.Success msg={resMsg} />}
+          {showResMsg && <Common.Alerts.Failure msg={resMsg} />}
 
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             {/* Form Context */}
             <FormProvider {...methods}>
               <Stack>
-                {/* Image Select */}
-                <Common.UncontrolledFields.ImageSelect
-                  name="Avatar"
-                  data={handleImageSelect}
-                  err={methods.formState.errors?.cover?.message}
-                />
                 {/* Username field */}
                 <Common.ControlledFields.Text
                   type="text"
@@ -129,6 +123,12 @@ const Register = () => {
                   label="Confirm password"
                   holder="Your password"
                   desc="Both password fields must match"
+                />
+                {/* Image Select */}
+                <Common.UncontrolledFields.ImageSelect
+                  name="Avatar"
+                  data={handleImageSelect}
+                  err={methods.formState.errors?.cover?.message}
                 />
               </Stack>
             </FormProvider>
