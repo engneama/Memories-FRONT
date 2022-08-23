@@ -2,10 +2,10 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   cover: {
-    maxWidth: "60vw",
-    [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
-      maxWidth: "100vw",
-    },
+    maxWidth: "650px",
+
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 
   upperPart: {
