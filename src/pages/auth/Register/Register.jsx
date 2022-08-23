@@ -105,7 +105,7 @@ const Register = () => {
                   name="username"
                   label="Username"
                   holder="username"
-                  desc="must be between 2 and 12 characters"
+                  desc="Must be between 2 and 12 characters"
                   icon={<FiUser />}
                 />
                 {/* Email field */}
@@ -128,7 +128,7 @@ const Register = () => {
                   name="confirmPassword"
                   label="Confirm password"
                   holder="Your password"
-                  desc="both password fields must match"
+                  desc="Both password fields must match"
                 />
               </Stack>
             </FormProvider>
