@@ -1,19 +1,20 @@
-import { ActionIcon, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { BsFillSunFill as Sun } from "react-icons/bs";
 import { RiMoonClearFill as Moon } from "react-icons/ri";
+import { useDarkMode } from "Hooks";
 
 const SwitchTheme = () => {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === "dark";
+  const { theme, toggle } = useDarkMode();
+  const isDark = theme === "dark";
   return (
     <ActionIcon
       variant="light"
       title="Toggle theme"
       aria-label="Toggle theme"
-      color={dark ? "yellow" : "blue"}
-      onClick={() => toggleColorScheme()}
+      color={isDark ? "yellow" : "blue"}
+      onClick={toggle}
     >
-      {dark ? <Sun size={18} /> : <Moon size={18} />}
+      {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </ActionIcon>
   );
 };
