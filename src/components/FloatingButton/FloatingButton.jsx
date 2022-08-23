@@ -15,12 +15,11 @@ const FloatingButton = () => {
   return (
     <Button
       style={{ display: !user && "none" }}
-      variant="light"
       className="FAB"
       component={Link}
       to="/createMemory"
     >
-      <TbPlus size={22} />
+      <TbPlus size={32} />
     </Button>
   );
 };
