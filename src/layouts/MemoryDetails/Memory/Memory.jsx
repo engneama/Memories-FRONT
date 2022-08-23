@@ -43,9 +43,12 @@ const Memory = ({ data, like, user }) => {
 
       {/* Upper Section that contains username, avatar, date, No. likes, like button */}
       <div className={classes.upperPart}>
-        <Title order={3} className={classes.title}>
-          {data.title}
-        </Title>
+        <Text transform="capitalize">
+          <Title order={3} className={classes.title}>
+            {data.title}
+          </Title>
+        </Text>
+
         {/* Auther Details */}
         <Group spacing="xs" position="center">
           {/* Avatar */}
