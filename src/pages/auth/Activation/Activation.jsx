@@ -1,7 +1,8 @@
 //Hooks
+import { useStyles } from "./styles";
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useStyles } from "./styles";
+import { useInterval } from "@mantine/hooks";
 //Axios
 import { auth } from "services";
 //UI Components
@@ -12,16 +13,35 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 const uuidRegex =
   /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 
+const pending = {
+  status: "pending",
+  title: "Hold on",
+  msg: "Please wait while we check with the server...",
+};
+
+const failure = {
+  status: "failure",
+  title: "Invalid",
+  msg: "The given code is Invalid.\nPlease check your email and try again.",
+};
+
+const success = {
+  replace: true,
+  state: {
+    isRegister: true,
+    message: "Your account has been activated.\nPlease login and enjoy!",
+  },
+};
+
 const Activation = () => {
-  let interval;
+  //hoks
   const { classes } = useStyles();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [res, setRes] = useState({
-    status: "pending",
-    title: "Hold on",
-    msg: "Please wait while we check with the server...",
-  });
+  const interval = useInterval(() => navigate("/login", success), 5000);
+  //states
+  const [res, setRes] = useState(pending);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const code = searchParams.get("code");
   const icon = {
@@ -48,11 +68,7 @@ const Activation = () => {
     const isCodeValid = uuidRegex.test(code);
 
     if (!isCodeValid) {
-      return setRes({
-        status: "failure",
-        title: "Invalid",
-        msg: "The given code is Invalid.\nPlease check your email and try again.",
-      });
+      return setRes(failure);
     }
 
     try {
@@ -64,7 +80,7 @@ const Activation = () => {
         msg: data.message,
       });
 
-      interval = setInterval(() => navigate("/login", { replace: true }), 5000);
+      setIsSuccess(true);
     } catch (error) {
       return setRes({
         status: "failure",
@@ -76,9 +92,15 @@ const Activation = () => {
 
   useEffect(() => {
     verifyCode();
-
-    return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      interval.start();
+    }
+
+    return interval.stop;
+  }, [isSuccess]);
 
   return (
     <section className={classes.section}>
