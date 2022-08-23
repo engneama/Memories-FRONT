@@ -34,10 +34,6 @@ const Tags = ({ initalValue = [] }) => {
     handleGetTags();
   }, []);
 
-  const test = (current, query) => {
-    return [...current, query];
-  };
-
   return (
     <Controller
       name="tags"
@@ -45,13 +41,12 @@ const Tags = ({ initalValue = [] }) => {
       defaultValue={initalValue}
       render={({ field }) => (
         <MultiSelect
-          {...field}
           required
           clearable //add a X button on the right to clear the field.
           creatable //the ability to add new tags
           searchable //the ability to search for a certain tag
           disabled={isLoading}
-          name="tags"
+          name={field.name}
           label="Tags"
           placeholder="Select or enter 3 tags"
           description="Select at least one tag"
@@ -67,13 +62,9 @@ const Tags = ({ initalValue = [] }) => {
             trigger("tags");
             field.onBlur(e);
           }}
-          // onCreate={(query) => {
-          //   console.log(query);
-          //   field.value = [...field.value, query];
-          //   console.log(field.value);
-          //   setData((current) => [...current, item]);
-          //   return item;
-          // }}
+          onChange={(e) => field.onChange(e)}
+          ref={(e) => field.ref(e)}
+          value={(e) => field.value(e)}
         />
       )}
     />
