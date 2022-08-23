@@ -49,7 +49,7 @@ const Memory = ({ data, like, user }) => {
         {/* Auther Details */}
         <Group spacing="xs" position="center">
           {/* Avatar */}
-          <Avatar src={author.avatarURL} size="sm" radius="xl" />
+          <Avatar src={author.avatarURL} size="sm" radius="md" />
           {/* Username */}
           <Text size="sm" color="dimmed">
             {author.username}
