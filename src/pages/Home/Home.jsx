@@ -35,7 +35,7 @@ const Home = () => {
 
   const editMemory = (data) => {
     set("editMemory", data);
-    navigate("/editMemory");
+    navigate("/memory/edit");
   };
 
   const deleteMemory = async (data) => {
@@ -43,7 +43,7 @@ const Home = () => {
   };
 
   const getAllMemories = async (page = 1) => {
-    await dispatch(getAll(page));
+    await dispatch(getAll({ page }));
   };
 
   useEffect(() => {
