@@ -17,7 +17,7 @@ const FloatingButton = () => {
       style={{ display: !user && "none" }}
       className="FAB"
       component={Link}
-      to="/createMemory"
+      to="/memory/create"
     >
       <TbPlus size={32} />
     </Button>
