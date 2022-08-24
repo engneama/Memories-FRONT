@@ -1,7 +1,16 @@
 import { API } from "./options";
 
 //GET
-const getAll = (data) => API.get(`/memory/getAll?page=${data}`);
+const getAll = (data) =>
+  API.get(
+    `/memory/getAll?${
+      data.userId
+        ? `page=${data.page}&userId=${data.userId}`
+        : `page=${data.page}`
+    }`
+  );
+const getAllLikes = (data) =>
+  API.get(`/memory/getAllLikes?page=${data.page}&userId=${data.userId}`);
 const getSingle = (data) => API.get(`/memory/getSingle/${data._id}`);
 const getTags = () => API.get("/memory/getTags");
 const search = ({ query, tags }) =>
@@ -20,6 +29,7 @@ const _delete = (data) => API.delete("/memory/delete", { data });
 export default {
   create,
   getAll,
+  getAllLikes,
   getSingle,
   getTags,
   search,
