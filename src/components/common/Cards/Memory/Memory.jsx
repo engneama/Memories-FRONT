@@ -37,10 +37,11 @@ const Memory = ({ data, user, like, edit, _delete }) => {
         to={`/memory/${data._id}`}
       >
         <Image
+          withPlaceholder
+          width="24em"
+          height="27em"
           src={data.coverURL}
           alt={data.description}
-          height={420}
-          withPlaceholder
           className={classes.cover}
         />
         {/* Overlay */}
