@@ -11,7 +11,9 @@ import { Avatar, UnstyledButton, Text } from "@mantine/core";
 import { Menu, Divider, Group } from "@mantine/core";
 //Icons
 import { FaHeart } from "react-icons/fa";
-import { TbLogout, TbMessage, TbChevronDown, TbEdit } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
+import { MdPostAdd, MdOutlineLibraryBooks } from "react-icons/md";
+import { TbLogout, TbMessage, TbChevronDown } from "react-icons/tb";
 
 const UserMenu = ({ user }) => {
   const dispatch = useDispatch();
@@ -51,28 +53,40 @@ const UserMenu = ({ user }) => {
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
+        <Menu.Label>Settings</Menu.Label>
+        <Menu.Item
+          component={Link}
+          to={`user/${user.username}`}
+          icon={<CgProfile size={18} color={theme.colors.gray[6]} />}
+        >
+          Your Profile
+        </Menu.Item>
+
         <Menu.Label>Make a Legacy</Menu.Label>
         <Menu.Item
           component={Link}
-          to="createMemory"
-          icon={<TbEdit size={16} color={theme.colors.yellow[6]} />}
+          to="/memory/create"
+          icon={<MdPostAdd size={20} color={theme.colors.yellow[6]} />}
         >
-          Create new Memory
+          Add New Memory
         </Menu.Item>
+
         <Menu.Label>Your Legacy</Menu.Label>
         <Menu.Item
           component={Link}
-          to="likes"
-          icon={<FaHeart size={14} color={theme.colors.red[6]} />}
+          to={`user/${user.username}/memories`}
+          icon={
+            <MdOutlineLibraryBooks size={18} color={theme.colors.orange[6]} />
+          }
         >
-          Liked Memories
+          Your Memories
         </Menu.Item>
         <Menu.Item
           component={Link}
-          to="comments"
-          icon={<TbMessage size={16} color={theme.colors.blue[6]} />}
+          to={`user/${user.username}/likes`}
+          icon={<FaHeart size={16} color={theme.colors.red[6]} />}
         >
-          Your comments
+          Liked Memories
         </Menu.Item>
 
         <Divider />
