@@ -3,7 +3,15 @@ import { useStyles } from "./styles";
 import { useParams } from "react-router-dom";
 //UI Components
 import { Title, Image } from "@mantine/core";
-
+// avatar
+// username
+// joined since
+// number of comments
+// number of likes
+// number of memories
+// latest comment
+// latest like
+// latest memory
 const Profile = () => {
   const { classes } = useStyles();
   const { username } = useParams();
