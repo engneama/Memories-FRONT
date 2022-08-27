@@ -8,6 +8,12 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
     [`&:hover .${getRef("cover")}`]: {
       transform: "scale(1.03)",
     },
+    [`&:hover .${getRef("badge")}`]: {
+      backgroundColor:
+        theme.colorScheme === "light"
+          ? theme.fn.rgba(theme.colors.gray[2], 1)
+          : theme.fn.rgba(theme.colors.gray[7], 1),
+    },
   },
 
   coverWrapper: {
@@ -22,7 +28,7 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
 
   overlay: {
     position: "absolute",
-    top: "20%",
+    top: "60%",
     left: 0,
     right: 0,
     bottom: 0,
@@ -36,15 +42,38 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
     position: "absolute",
     top: "375px",
     left: theme.spacing.sm,
-    pointerEvents: "none",
+    textDecoration: "none",
+    color: "inherit",
   },
 
   badge: {
+    ref: getRef("badge"),
     position: "absolute",
-    top: "10px",
-    right: "12px",
+    top: "420px",
     pointerEvents: "none",
-    backgroundColor: "transparent",
+    backgroundColor:
+      theme.colorScheme === "light"
+        ? theme.fn.rgba(theme.colors.gray[2], 0.65)
+        : theme.fn.rgba(theme.colors.gray[7], 0.65),
+  },
+
+  like: {
+    right: "39px",
+    borderRadius: "8px 0 0 8px",
+  },
+
+  time: {
+    left: 0,
+    borderRadius: "0 8px 8px 0",
+    color:
+      theme.colorScheme === "light"
+        ? theme.colors.dark[3]
+        : theme.colors.dark[0],
+  },
+
+  comments: {
+    right: 0,
+    borderRadius: "0 0 0 0",
   },
 
   likes: {
