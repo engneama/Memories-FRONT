@@ -19,12 +19,6 @@ const memoriesSlice = createSlice({
         state.numberOfPages = action.payload.data.numberOfPages;
       })
       //👆 GET ALL
-      //👇 GET ALL LIKES
-      .addCase(thunk.getAllLikes.fulfilled, (state, action) => {
-        state.memories = action.payload.data.memories;
-        state.numberOfPages = action.payload.data.numberOfPages;
-      })
-      //👆 GET ALL LIKES
       //👇 CREATE
       .addCase(thunk.create.pending, () => {
         NOTIF.Pending(

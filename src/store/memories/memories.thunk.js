@@ -17,20 +17,6 @@ export const getAll = createAsyncThunk(
   }
 );
 
-export const getAllLikes = createAsyncThunk(
-  "memories/getAllLikes",
-  async (memoryData, thunkAPI) => {
-    try {
-      const { data } = await memory.getAllLikes(memoryData);
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log(error.response.data);
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
 export const create = createAsyncThunk(
   "memories/create",
   async (memoryData, thunkAPI) => {
