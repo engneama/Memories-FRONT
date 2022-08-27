@@ -1,7 +1,7 @@
 //Hooks
 import { useStyles } from "./styles";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 //Actions
 import { recommendations } from "services";
@@ -16,6 +16,7 @@ const Details = () => {
   //Basic
   const { classes } = useStyles();
   const { _id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //useStates
   const [recosData, setRecosData] = useState(null);
@@ -33,7 +34,13 @@ const Details = () => {
   };
 
   const getMemorys = async () => {
-    await dispatch(getSingle({ _id }));
+    const { payload } = await dispatch(getSingle({ _id }));
+
+    if (payload?.statusCode === 404) {
+      navigate(`/${payload.statusCode}`, {
+        state: { code: payload.statusCode, msg: payload.message },
+      });
+    }
   };
 
   const getComments = async () => {
