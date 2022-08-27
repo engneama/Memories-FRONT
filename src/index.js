@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MantineProviders from "components/MantineProviders";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 import App from "./App";
+import { ScrollToTop } from "components";
 import store from "store/store";
 
 if (process.env.NODE_ENV === "production") {
@@ -17,6 +18,7 @@ root.render(
     <BrowserRouter>
       <ReduxProvider store={store}>
         <MantineProviders>
+          <ScrollToTop />
           <Routes>
             <Route path="/*" element={<App />} />
           </Routes>
