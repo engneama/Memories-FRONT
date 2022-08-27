@@ -1,24 +1,34 @@
 //Hooks
 import { useStyles } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 //UI Components
 import { Container, Title, Text, Button, Group } from "@mantine/core";
+//Variables
+const defautValues = {
+  code: 404,
+  title: "You have found a secret place.",
+  msg: "Unfortunately, this is only a 404 page.\nYou may have mistyped the address, or the page has been moved to another URL.",
+};
 
 const Missing = () => {
   const { classes } = useStyles();
+  const location = useLocation();
+  const { state } = location;
+  const code = state?.code ? state?.code : defautValues.code;
+  const title = state?.code ? "Uh Oh!" : defautValues.title;
+  const msg = state?.msg ? state?.msg : defautValues.msg;
 
   return (
     <Container className={classes.root}>
-      <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
+      <div className={classes.label}>{code}</div>
+      <Title className={classes.title}>{title}</Title>
       <Text
         color="dimmed"
         size="lg"
         align="center"
         className={classes.description}
       >
-        Unfortunately, this is only a 404 page. You may have mistyped the
-        address, or the page has been moved to another URL.
+        {msg}
       </Text>
       <Group position="center">
         <Button size="md" component={Link} to="/">
