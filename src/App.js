@@ -30,7 +30,7 @@ const App = () => {
             <Route index element={<Navigate to="/" />} />
             <Route path=":username" element={<User.Profile />} />
             <Route path=":username/memories" element={<User.Memories />} />
-            <Route path=":username/likes" element={<User.Likes />} />
+            <Route path=":username/likes" element={<User.Memories />} />
           </Route>
 
           {/* Prevent LoggenIn users from accessing */}
