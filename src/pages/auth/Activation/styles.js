@@ -2,6 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   section: {
+    width: "100%",
     display: "flex",
     textAlign: "center",
     alignItems: "center",
