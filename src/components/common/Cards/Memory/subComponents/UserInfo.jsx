@@ -1,21 +1,18 @@
 //Components
-import Moment from "react-moment";
+import { Link } from "react-router-dom";
 //UI Components
-import { Group, Avatar, Text } from "@mantine/core";
+import { Group, Avatar, Text, Box } from "@mantine/core";
 
-const UserInfo = ({ styles, URL, username, time }) => {
+const UserInfo = ({ styles, URL, username }) => {
   return (
-    <Group className={styles}>
-      <Avatar src={URL} radius="sm" />
-      <div>
-        <Text>{username}</Text>
-        <Text size="xs">
-          <Moment fromNow interval={60000}>
-            {time}
-          </Moment>
-        </Text>
-      </div>
-    </Group>
+    <Box className={styles} component={Link} to={`/user/${username}`}>
+      <Group>
+        <Avatar src={URL} radius="sm" />
+        <div>
+          <Text>{username}</Text>
+        </div>
+      </Group>
+    </Box>
   );
 };
 
