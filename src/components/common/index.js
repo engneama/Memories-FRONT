@@ -6,7 +6,7 @@ import Alerts from "./Alert";
 import Logo from "./Logo";
 import Cards from "./Cards";
 import Badges from "./Badges";
-import Modeals from "./Modeals";
+import Modals from "./Modals";
 
 export default {
   Notifications,
@@ -17,5 +17,5 @@ export default {
   Logo,
   Cards,
   Badges,
-  Modeals,
+  Modals,
 };
