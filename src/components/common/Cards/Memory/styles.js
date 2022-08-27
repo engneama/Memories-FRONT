@@ -8,12 +8,12 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
     [`&:hover .${getRef("cover")}`]: {
       transform: "scale(1.03)",
     },
-    [`&:hover .${getRef("badge")}`]: {
-      backgroundColor:
-        theme.colorScheme === "light"
-          ? theme.fn.rgba(theme.colors.gray[2], 1)
-          : theme.fn.rgba(theme.colors.gray[7], 1),
-    },
+    // [`&:hover .${getRef("badge")}`]: {
+    //   backgroundColor:
+    //     theme.colorScheme === "light"
+    //       ? theme.fn.rgba(theme.colors.gray[2], 1)
+    //       : theme.fn.rgba(theme.colors.gray[7], 1),
+    // },
   },
 
   coverWrapper: {
@@ -28,7 +28,7 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
 
   overlay: {
     position: "absolute",
-    top: "60%",
+    top: "45%",
     left: 0,
     right: 0,
     bottom: 0,
@@ -51,10 +51,11 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
     position: "absolute",
     top: "420px",
     pointerEvents: "none",
-    backgroundColor:
-      theme.colorScheme === "light"
-        ? theme.fn.rgba(theme.colors.gray[2], 0.65)
-        : theme.fn.rgba(theme.colors.gray[7], 0.65),
+    backgroundColor: "transparent",
+    // backgroundColor:
+    //   theme.colorScheme === "light"
+    //     ? theme.fn.rgba(theme.colors.gray[2], 0.65)
+    //     : theme.fn.rgba(theme.colors.gray[7], 0.65),
   },
 
   like: {
