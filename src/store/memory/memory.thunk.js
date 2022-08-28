@@ -10,7 +10,6 @@ export const getSingle = createAsyncThunk(
       const { data } = await memory.getSingle(memoryData);
       return data;
     } catch (error) {
-      console.log(error.response.data);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -25,7 +24,6 @@ export const like = createAsyncThunk(
       thunkAPI.dispatch(addUser(userData));
       return data;
     } catch (error) {
-      console.log("Thunk: ", error);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken

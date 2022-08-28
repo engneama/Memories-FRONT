@@ -77,8 +77,6 @@ const Search = () => {
     }
   }, [currentPage, search]);
 
-  console.log("search: ", search);
-
   return (
     <section className={classes.section}>
       <Container size="xl">

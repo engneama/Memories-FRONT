@@ -52,7 +52,6 @@ const Create = () => {
     delete editData.coverURL;
 
     const { payload } = await dispatch(update(editData));
-    console.log(payload);
     if (payload?.memory) {
       remove("editMemory");
       navigate("/");

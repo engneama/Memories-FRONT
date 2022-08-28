@@ -8,10 +8,8 @@ export const getAll = createAsyncThunk(
   async (_id, thunkAPI) => {
     try {
       const { data } = await comments.getAll(_id);
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error.response.data);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken
@@ -33,7 +31,6 @@ export const create = createAsyncThunk(
       thunkAPI.dispatch(addUser(userData));
       return data;
     } catch (error) {
-      console.log(error);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken
@@ -76,7 +73,6 @@ export const _delete = createAsyncThunk(
       thunkAPI.dispatch(addUser(userData));
       return _id;
     } catch (error) {
-      console.log(error);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken
@@ -96,7 +92,6 @@ export const like = createAsyncThunk(
       const { data } = await comments.like(likeData);
       return data;
     } catch (error) {
-      console.log(error);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken

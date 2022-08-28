@@ -7,7 +7,6 @@ export const login = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const { data } = await auth.login(userData);
-      console.log("login: ", data);
       return await cookieExtractor(data.data.accessToken);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

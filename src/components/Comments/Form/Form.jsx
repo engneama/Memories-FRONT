@@ -35,21 +35,12 @@ const Form = ({ memoryId, user }) => {
     if (!isEdit) {
       const commentData = { body: data.comment, author: user._id, memoryId };
 
-      const { payload } = await dispatch(create(commentData));
-      if (payload?.memory) {
-        console.log("SUCCESS: ", payload);
-      } else {
-        console.log("ERROR: ", payload);
-      }
+      await dispatch(create(commentData));
     } else {
       localValue.body = data.comment;
 
-      const { payload } = await dispatch(update(localValue));
-      if (payload?.memory) {
-        console.log("SUCCESS: ", payload);
-      } else {
-        console.log("ERROR: ", payload);
-      }
+      await dispatch(update(localValue));
+
       setLocalValue(null);
     }
 

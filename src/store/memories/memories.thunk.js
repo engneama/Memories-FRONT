@@ -8,10 +8,8 @@ export const getAll = createAsyncThunk(
   async (memoryData, thunkAPI) => {
     try {
       const { data } = await memory.getAll(memoryData);
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error.response.data);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -68,7 +66,6 @@ export const _delete = createAsyncThunk(
       thunkAPI.dispatch(addUser(userData));
       return { ...data, ...memoryData };
     } catch (error) {
-      console.log(error);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken
@@ -86,12 +83,10 @@ export const like = createAsyncThunk(
   async (likeData, thunkAPI) => {
     try {
       const { data } = await memory.like(likeData);
-      console.log("Thunk: ", data);
       const userData = await cookieExtractor(data.accessToken.data.accessToken);
       thunkAPI.dispatch(addUser(userData));
       return data;
     } catch (error) {
-      console.log("Thunk: ", error);
       if (
         error.response.data?.accessToken ||
         error.response.data?.refreshToken
@@ -109,10 +104,8 @@ export const searchReq = createAsyncThunk(
   async (searchData, thunkAPI) => {
     try {
       const { data } = await search.search(searchData);
-      console.log("Thunk 1: ", data);
       return data;
     } catch (error) {
-      console.log("Thunk 2: ", error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
