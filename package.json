@@ -9,6 +9,7 @@
     "@mantine/hooks": "^5.1.7",
     "@mantine/notifications": "^5.1.7",
     "@mantine/rte": "^5.1.7",
+    "@mantine/spotlight": "^5.1.7",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
