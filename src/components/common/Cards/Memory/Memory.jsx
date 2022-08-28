@@ -22,7 +22,13 @@ const Memory = ({ data, user, like, edit, _delete }) => {
   const isAdmin = user.role === "admin";
 
   const tags = data.tags.map((tag) => (
-    <Text size="sm" color="dimmed" key={tag} component={Link} to={`/`}>
+    <Text
+      size="sm"
+      color="dimmed"
+      key={tag}
+      component={Link}
+      to={`/search?tags=${tag}`}
+    >
       {`#${tag} `}
     </Text>
   ));
