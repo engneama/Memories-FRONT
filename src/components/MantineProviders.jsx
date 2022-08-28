@@ -1,6 +1,7 @@
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { Spotlight } from "components";
 
 const localStorageOptions = {
   key: "mantine-color-scheme",
@@ -24,7 +25,9 @@ const MantineProviders = ({ children }) => {
         withGlobalStyles
         withNormalizeCSS
       >
-        <NotificationsProvider>{children}</NotificationsProvider>
+        <Spotlight.Provider>
+          <NotificationsProvider>{children}</NotificationsProvider>
+        </Spotlight.Provider>
       </MantineProvider>
     </ColorSchemeProvider>
   );
