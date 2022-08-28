@@ -7,4 +7,7 @@ export const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.lg,
     marginBottom: theme.spacing.lg,
   },
+  notFound: {
+    textAlign: "center",
+  },
 }));
