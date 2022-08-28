@@ -16,13 +16,13 @@ const Header = () => {
     <HeaderCom py="sm">
       <Container>
         <Grid>
-          <Grid.Col span={4}>
-            <Center>
+          <Grid.Col span={4} style={{ margin: "auto 0" }}>
+            <Group>
               <Box className={classes.hideOnMobile}>
                 <Common.Logo.ImageLogo />
               </Box>
               <Common.Logo.TextLogo />
-            </Center>
+            </Group>
           </Grid.Col>
           <Grid.Col span={8}>
             <Group position="right">
