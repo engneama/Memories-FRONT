@@ -7,7 +7,6 @@ const Likes = ({ badgeStyles, likesStyles, likes }) => {
       className={badgeStyles}
       variant="light"
       color="pink"
-      size="sm"
       leftSection={<AiFillHeart style={{ marginTop: "4px" }} />}
     >
       <Text className={likesStyles}>{likes}</Text>

@@ -7,7 +7,6 @@ const Comments = ({ badgeStyles, likesStyles, data }) => {
       className={badgeStyles}
       variant="light"
       color="blue"
-      size="sm"
       leftSection={<FaComments style={{ marginTop: "4px" }} />}
     >
       <Text className={likesStyles}>{data}</Text>

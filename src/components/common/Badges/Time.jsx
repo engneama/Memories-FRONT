@@ -9,7 +9,6 @@ const Time = ({ badgeStyles, likesStyles, time }) => {
     <Badge
       className={badgeStyles}
       variant="light"
-      size="sm"
       leftSection={<FaClock style={{ marginTop: "4px" }} />}
     >
       <Text className={likesStyles}>
