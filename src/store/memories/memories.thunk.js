@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { memory } from "services";
+import { memory, search } from "services";
 import { addUser, removeUser } from "../auth/auth.slice";
 import { cookieExtractor, cookieDestroyer } from "helpers";
 
@@ -99,6 +99,20 @@ export const like = createAsyncThunk(
         thunkAPI.dispatch(removeUser());
         await cookieDestroyer();
       }
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const searchReq = createAsyncThunk(
+  "memories/search",
+  async (searchData, thunkAPI) => {
+    try {
+      const { data } = await search.search(searchData);
+      console.log("Thunk 1: ", data);
+      return data;
+    } catch (error) {
+      console.log("Thunk 2: ", error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

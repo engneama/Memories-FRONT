@@ -106,8 +106,14 @@ const memoriesSlice = createSlice({
         state.memories = state.memories.map((memory) =>
           memory._id === payload._id ? payload : memory
         );
+      })
+      //👆 LIKE
+      //👇 SEARCH
+      .addCase(thunk.searchReq.fulfilled, (state, action) => {
+        state.memories = action.payload.data.memories;
+        state.numberOfPages = action.payload.data.numberOfPages;
       });
-    //👆 LIKE
+    //👆 SEARCH
   },
 });
 
