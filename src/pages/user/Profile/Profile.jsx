@@ -2,6 +2,7 @@
 import { useStyles } from "./styles";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useTitle } from "Hooks";
 //Actions
 import { user } from "services";
 //Components
@@ -26,6 +27,7 @@ const Profile = () => {
   const { classes } = useStyles();
   const { username } = useParams();
   const navigate = useNavigate();
+  const { setTitle } = useTitle();
   //states
   const [profData, setProfData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +41,8 @@ const Profile = () => {
       alt={`${username}'s avatar`}
     />
   );
+  //setTitle
+  setTitle(`${username} profile`);
 
   const getProfile = async () => {
     setIsLoading(true);

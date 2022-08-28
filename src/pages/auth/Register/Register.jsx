@@ -5,6 +5,7 @@ import { useStyles } from "./styles";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useTitle } from "Hooks";
 //Actions
 import { auth } from "services";
 //Components
@@ -25,10 +26,13 @@ const Register = () => {
   //hooks
   const { classes } = useStyles();
   const navigate = useNavigate();
+  const { setTitle } = useTitle();
   //states
   const [isLoading, setIsLoading] = useState(false);
   const [showResMsg, setShowResMsg] = useState(false);
   const [resMsg, setResMsg] = useState("");
+  //setTitle
+  setTitle("Register");
 
   const methods = useForm({
     resolver: yupResolver(registerSchema),

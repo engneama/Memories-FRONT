@@ -2,11 +2,12 @@
 import { loginSchema } from "rules";
 import { yupResolver } from "@hookform/resolvers/yup";
 //Hooks
+import { useStyles } from "./styles";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useStyles } from "./styles";
+import { useTitle } from "Hooks";
 //Actions
 import { login } from "store/auth/auth.thunk";
 //Components
@@ -26,12 +27,15 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { setTitle } = useTitle();
   //states
   const [isLoading, setIsLoading] = useState(false);
   const [showResMsg, setShowResMsg] = useState(false);
   const [resMsg, setResMsg] = useState("");
   //variables
   const form = state?.form?.pathname || "/";
+  //setTitle
+  setTitle("Login");
 
   const methods = useForm({
     resolver: yupResolver(loginSchema),

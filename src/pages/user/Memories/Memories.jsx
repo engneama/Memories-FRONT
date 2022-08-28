@@ -4,7 +4,7 @@ import { useStyles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useParams, useLocation, Link } from "react-router-dom";
-import { useLocalStorage } from "Hooks";
+import { useTitle, useLocalStorage } from "Hooks";
 //Actions
 import { getAll, like, _delete } from "store/memories/memories.thunk";
 //UI Components
@@ -22,6 +22,7 @@ const Memories = () => {
   const { pathname } = useLocation();
   const { username } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { setTitle } = useTitle();
   //states
   const [isLoading, setIsLoading] = useState(true);
   //Selectors
@@ -37,6 +38,8 @@ const Memories = () => {
   const isLike = pathname.includes("Likes") || pathname.includes("likes");
   //Variables
   const type = isMemory ? "memories" : isLike && "likes";
+  //setTitle
+  setTitle(`${username} type`);
 
   const handleOnPageChange = async (data) => {
     setSearchParams({ page: data });

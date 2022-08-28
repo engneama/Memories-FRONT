@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useStyles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Navigate, useLocation, Link } from "react-router-dom";
-import { useLocalStorage } from "Hooks";
+import { useLocation } from "react-router-dom";
+import { useTitle, useLocalStorage } from "Hooks";
 //Actions
 import { searchReq, like, _delete } from "store/memories/memories.thunk";
 //UI Components
@@ -19,6 +19,7 @@ const Search = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { setTitle } = useTitle();
   //states
   const [isLoading, setIsLoading] = useState(true);
   //Selectors
@@ -32,6 +33,9 @@ const Search = () => {
   //Checkers
   const isReady = data?.memories !== null;
   const isExists = data?.memories?.length > 0;
+  //setTitle
+  getQuery && setTitle(`${getQuery} search results`);
+  getTags && setTitle(`${getTags} search results`);
 
   const handleOnPageChange = async (data) => {
     setSearchParams({ page: data });

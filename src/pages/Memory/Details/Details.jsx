@@ -3,6 +3,7 @@ import { useStyles } from "./styles";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTitle } from "Hooks";
 //Actions
 import { recommendations } from "services";
 import { getSingle, like } from "store/memory/memory.thunk";
@@ -18,6 +19,7 @@ const Details = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { setTitle } = useTitle();
   //useStates
   const [recosData, setRecosData] = useState(null);
   //useSelectors
@@ -28,6 +30,8 @@ const Details = () => {
   const isMemoryReady = memoryData !== null;
   const isCommentsReady = commentsData !== null;
   const isRecosReady = recosData !== null;
+
+  isMemoryReady && setTitle(memoryData.title);
 
   const hanldeLike = async (data) => {
     await dispatch(like(data));

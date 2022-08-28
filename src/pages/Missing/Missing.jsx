@@ -1,6 +1,7 @@
 //Hooks
 import { useStyles } from "./styles";
 import { Link, useLocation } from "react-router-dom";
+import { useTitle } from "Hooks";
 //UI Components
 import { Container, Title, Text, Button, Group } from "@mantine/core";
 //Variables
@@ -11,12 +12,17 @@ const defautValues = {
 };
 
 const Missing = () => {
+  //Hookes
   const { classes } = useStyles();
   const location = useLocation();
+  const { setTitle } = useTitle();
+  //Variables
   const { state } = location;
   const code = state?.code ? state?.code : defautValues.code;
   const title = state?.code ? "Uh Oh!" : defautValues.title;
   const msg = state?.msg ? state?.msg : defautValues.msg;
+  //setTitle
+  setTitle("page not found");
 
   return (
     <Container className={classes.root}>

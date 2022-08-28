@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
-import useLocalStorage from "Hooks/useLocalStorage";
+import { useTitle, useLocalStorage } from "Hooks";
 //Actions
 import { update } from "store/memories/memories.thunk";
 //Helpers
@@ -24,7 +24,8 @@ const Create = () => {
   const { classes } = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { get, remove } = useLocalStorage(); //editMemory
+  const { get, remove } = useLocalStorage();
+  const { setTitle } = useTitle();
   //States
   const [editData] = useState(get("editMemory"));
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +33,8 @@ const Create = () => {
   const methods = useForm({
     resolver: yupResolver(memorySchema.edit),
   });
+  //setTitle
+  editData && setTitle(`edit ${editData.title}`);
 
   const handleBodyOnChange = (e) => {
     methods.setValue("body", e.body);

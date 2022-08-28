@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
+import { useTitle } from "Hooks";
 //Actions
 import { create } from "store/memories/memories.thunk";
 //Helpers
@@ -23,6 +24,7 @@ const Create = () => {
   const { classes } = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { setTitle } = useTitle();
   //States
   const [isLoading, setIsLoading] = useState(false);
   //Selectors
@@ -31,6 +33,8 @@ const Create = () => {
   const methods = useForm({
     resolver: yupResolver(memorySchema.create),
   });
+  //setTitle
+  setTitle("Create memory");
 
   const handleImageSelect = (data) => {
     methods.register("cover");

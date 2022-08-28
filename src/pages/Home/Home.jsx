@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useStyles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useLocalStorage } from "Hooks";
+import { useTitle, useLocalStorage } from "Hooks";
 //Actions
 import { getAll, like, _delete } from "store/memories/memories.thunk";
 //UI Components
@@ -17,6 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { set } = useLocalStorage();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { setTitle } = useTitle();
   //states
   const [isLoading, setIsLoading] = useState(true);
   //Selectors
@@ -26,6 +27,8 @@ const Home = () => {
   const isReady = data.memories !== null;
   //Variables
   const currentPage = searchParams.get("page") ? searchParams.get("page") : 1;
+  //setTitle
+  setTitle("Share memories with the world!");
 
   const handleOnPageChange = async (data) => {
     setSearchParams({ page: data });

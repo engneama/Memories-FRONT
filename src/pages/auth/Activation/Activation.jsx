@@ -3,6 +3,7 @@ import { useStyles } from "./styles";
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useInterval } from "@mantine/hooks";
+import { useTitle } from "Hooks";
 //Axios
 import { auth } from "services";
 //UI Components
@@ -39,9 +40,12 @@ const Activation = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const interval = useInterval(() => navigate("/login", success), 5000);
+  const { setTitle } = useTitle();
   //states
   const [res, setRes] = useState(pending);
   const [isSuccess, setIsSuccess] = useState(false);
+  //setTitle
+  setTitle("Account Activation");
 
   const code = searchParams.get("code");
   const icon = {
