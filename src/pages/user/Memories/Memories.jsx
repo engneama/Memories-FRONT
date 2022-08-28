@@ -1,19 +1,17 @@
 //Hooks
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useStyles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useNavigate,
-  useSearchParams,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useLocalStorage } from "Hooks";
 //Actions
 import { getAll, like, _delete } from "store/memories/memories.thunk";
 //UI Components
 import { Common, MainPage } from "components";
 import { Container, Title, Text, Button } from "@mantine/core";
+//Icons
+import { MdArrowBackIosNew } from "react-icons/md";
 
 const Memories = () => {
   //Hookes
@@ -24,6 +22,8 @@ const Memories = () => {
   const { pathname } = useLocation();
   const { username } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  //states
+  const [isLoading, setIsLoading] = useState(true);
   //Selectors
   const data = useSelector((state) => state.memories);
   const { user } = useSelector((state) => state.auth);
@@ -35,6 +35,8 @@ const Memories = () => {
   const isMemory =
     pathname.includes("Memories") || pathname.includes("memories");
   const isLike = pathname.includes("Likes") || pathname.includes("likes");
+  //Variables
+  const type = isMemory ? "memories" : isLike && "likes";
 
   const handleOnPageChange = async (data) => {
     setSearchParams({ page: data });
@@ -54,13 +56,16 @@ const Memories = () => {
   };
 
   const getAllMemories = async (page = 1) => {
-    const type = isMemory ? "memories" : isLike && "likes";
+    setIsLoading(true);
+
     const { payload } = await dispatch(getAll({ page, username, type }));
     if (payload?.statusCode === 404) {
       navigate(`/${payload?.statusCode}`, {
         state: { code: payload.statusCode, msg: payload.message },
       });
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -70,7 +75,13 @@ const Memories = () => {
   return (
     <section className={classes.section}>
       <Container size="xl">
-        {!isReady && <Common.LoadingOverlay />}
+        {isLoading && <Common.LoadingOverlay />}
+        <Text transform="capitalize" component={Link} to={`/user/${username}`}>
+          <MdArrowBackIosNew /> back to profile
+        </Text>
+        <Title order={3} my="md">
+          {username}'s {type}
+        </Title>
         {isReady && !isExists && (
           <div className={classes.notFound}>
             <Title order={2}>Uh Oh!</Title>
