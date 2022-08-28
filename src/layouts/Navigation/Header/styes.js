@@ -1,8 +1,13 @@
 import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
-  hideOnMobile: {
-    [theme.fn.smallerThan("sm")]: {
+  hideSLXS: {
+    [theme.fn.smallerThan("xs")]: {
+      display: "none",
+    },
+  },
+  hideGTXS: {
+    [theme.fn.largerThan("xs")]: {
       display: "none",
     },
   },
