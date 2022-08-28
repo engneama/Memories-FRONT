@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //UI Components
 import { Button } from "@mantine/core";
 //Icons
-import { TbPlus } from "react-icons/tb";
+import { MdLibraryAdd } from "react-icons/md";
 //Styles
 import "./styles.css";
 
@@ -19,7 +19,7 @@ const FloatingButton = () => {
       component={Link}
       to="/memory/create"
     >
-      <TbPlus size={32} />
+      <MdLibraryAdd size={26} />
     </Button>
   );
 };
