@@ -1,5 +1,5 @@
 //Hooks
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useStyles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -17,6 +17,8 @@ const Home = () => {
   const navigate = useNavigate();
   const { set } = useLocalStorage();
   const [searchParams, setSearchParams] = useSearchParams();
+  //states
+  const [isLoading, setIsLoading] = useState(true);
   //Selectors
   const data = useSelector((state) => state.memories);
   const { user } = useSelector((state) => state.auth);
@@ -43,7 +45,9 @@ const Home = () => {
   };
 
   const getAllMemories = async (page = 1) => {
+    setIsLoading(true);
     await dispatch(getAll({ page }));
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -53,7 +57,7 @@ const Home = () => {
   return (
     <section className={classes.section}>
       <Container size="xl">
-        {!isReady && <Common.LoadingOverlay />}
+        {isLoading && <Common.LoadingOverlay />}
         {isReady && (
           <MainPage.Memories
             data={data.memories}
